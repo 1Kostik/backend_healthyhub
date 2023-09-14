@@ -1,0 +1,8 @@
+tmp/*
+!tmp/.gitkeep
+avatars/*
+!avatars/.gitkeep
+node_modules/
+.env
+.idea
+.vscode
