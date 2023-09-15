@@ -35,7 +35,7 @@ const statisticAdd = Joi.object({
   calories: Joi.number().min(0).required(),
   water: Joi.number().min(0).required(),
   weight: Joi.number().min(0).required(),
-  owner: Joi.objectId().required(),
+  // owner: Joi.object().required(),
 });
 
 const joiSchema = { statisticAdd };

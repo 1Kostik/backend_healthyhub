@@ -7,14 +7,7 @@ const {
   verify,
   resendVerifyEmail,
 } = require("./auth");
-const {
-  updateFavorite,
-  updateById,
-  addContact,
-  deleteById,
-  getById,
-  getAll,
-} = require("./contacts");
+
 const { uploadAvatar } = require("./user");
 module.exports = {
   verify,
@@ -23,12 +16,6 @@ module.exports = {
   current,
   logout,
   updateSubscriptionUser,
-  updateFavorite,
-  updateById,
-  addContact,
-  deleteById,
-  getById,
-  getAll,
   register,
   login,
 };
