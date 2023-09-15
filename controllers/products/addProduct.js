@@ -1,15 +1,16 @@
-// const { Contact } = require("../../models/contacts");
+const { Products } = require("../../models");
 
 
 const addProduct = async (req, res, next) => {
-  const { _id: owner } = req.user;
+  console.log(req.body)
+  // const { _id: owner } = req.user;
   const body = req.body;
-  const newProduct = await Product.create({ ...body, owner });
+  const newProducts = await Products.create({ ...body});
   res.status(201).json({
     status: "success",
     code: 201,
     data: {
-      newContact,
+      newProducts,
     },
   });
 };

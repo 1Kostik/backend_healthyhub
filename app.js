@@ -6,7 +6,7 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 const authRouter = require("./routes/api/auth");
-
+const userProducts= require("./routes/api/products")
 
 const userRouter = require("./routes/api/users");
 
@@ -20,6 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/users", authRouter);
 app.use("/api/users", userRouter);
+app.use("/api/user", userProducts);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found my page!" });
@@ -33,3 +34,4 @@ app.use((err, req, res, next) => {
 module.exports = app;
 
 //Hello World !!!
+// POST /api/user/food-intake
