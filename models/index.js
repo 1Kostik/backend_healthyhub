@@ -1,9 +1,13 @@
-const { Contact, userSchemas } = require("./contacts");
+const { Product } = require("./products");
 const { User, schemas } = require("./user");
+const { Statistic, joiSchema } = require("./statistic");
+const { Diary } = require("./diary");
 
 module.exports = {
   User,
   schemas,
-  Contact,
-  userSchemas,
+  Product,
+  Statistic,
+  joiSchema,
+  Diary,
 };
