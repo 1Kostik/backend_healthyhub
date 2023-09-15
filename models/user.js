@@ -22,7 +22,7 @@ const userSchema = new Schema(
     youGoal: {
       type: String,
       enum: ["Lose Fat", "Maintain", "Gain Muscle"],
-      default: "starter",
+      default: null,
     },
     token: {
       type: String,
