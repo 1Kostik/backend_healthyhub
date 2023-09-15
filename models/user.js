@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi");
+const { handleMongooseError } = require("../utils");
 
 const emailRegexp =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -25,7 +26,7 @@ const userSchema = new Schema(
     youGoal: {
       type: String,
       enum: ["Lose Fat", "Maintain", "Gain Muscle"],
-      default: null,
+      default: "Lose Fat",
     },
     gender: {
       type: String,
@@ -59,20 +60,29 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
+    avatar: {
+      type: String,
+      default: null,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: false,
+    },
   },
   { versionKey: false, timestamps: true }
 );
 
-const User = model("user", userSchema);
+userSchema.post("save", handleMongooseError);
 
-const userAdd = Joi.object({
+const registerSchema = Joi.object({
   name: Joi.string().min(2).max(30).required(),
   email: Joi.string().pattern(emailRegexp).required(),
   password: Joi.string().min(6).required(),
   youGoal: Joi.string().valid("Lose Fat", "Maintain", "Gain Muscle"),
 });
 
-const userLogin = Joi.object({
+const loginSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
   password: Joi.string().min(6).required(),
 });
@@ -83,7 +93,9 @@ const userUpdate = Joi.object({
   age: Joi.number().required(),
 });
 
-const schemas = { userAdd, userLogin, userUpdate };
+const schemas = { loginSchema, registerSchema, userUpdate };
+
+const User = model("user", userSchema);
 
 module.exports = {
   User,
