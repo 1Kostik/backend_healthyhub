@@ -2,6 +2,8 @@ require("dotenv").config();
 const path = require("path");
 
 const express = require("express");
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 const logger = require("morgan");
 const cors = require("cors");
@@ -15,6 +17,7 @@ app.use("/avatars", express.static(path.join(__dirname, "public", "avatars")));
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
@@ -33,5 +36,5 @@ app.use((err, req, res, next) => {
 
 module.exports = app;
 
-//Hello World !!!
+// Hello World !!!
 // POST /api/user/food-intake
