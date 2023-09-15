@@ -1,4 +1,4 @@
-const crypto = require("node:crypto");
+const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const { BASE_URL } = process.env;
 const { User } = require("../../models");
