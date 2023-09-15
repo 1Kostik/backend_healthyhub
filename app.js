@@ -1,5 +1,5 @@
 require("dotenv").config();
-const path = require("node:path")
+const path = require("node:path");
 
 const express = require("express");
 
@@ -10,9 +10,8 @@ const contactsRouter = require("./routes/api/contacts");
 
 const userRouter = require("./routes/api/users");
 
-
 const app = express();
-app.use("/avatars", express.static(path.join(__dirname, "public","avatars")));
+app.use("/avatars", express.static(path.join(__dirname, "public", "avatars")));
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
@@ -32,3 +31,5 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
+
+//Hello World !!!
