@@ -19,9 +19,9 @@ const userSchema = new Schema(
       type: String,
       require: true,
     },
-    subscription: {
+    youGoal: {
       type: String,
-      enum: ["starter", "pro", "business"],
+      enum: ["Lose Fat", "Maintain", "Gain Muscle"],
       default: "starter",
     },
     token: {
