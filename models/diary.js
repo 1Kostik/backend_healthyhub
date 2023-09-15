@@ -14,6 +14,15 @@ const diarySchema = Schema(
       type: Number,
       default: 0,
     },
+    water:{
+      type: Number,
+      default: 0,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );
