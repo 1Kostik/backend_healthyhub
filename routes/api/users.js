@@ -1,4 +1,4 @@
-const path = require("node:path");
+const path = require("path");
 const express = require("express");
 const UserController = require("../../controllers/user");
 const { authenticate,resize } = require("../../middlewares");
