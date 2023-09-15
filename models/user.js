@@ -49,7 +49,7 @@ const registerSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().pattern(emailRegexp).required(),
   password: Joi.string().min(6).required(),
-  subscription: Joi.string().valid("starter", "pro", "business"),
+  youGoal: Joi.string().valid("Lose Fat", "Maintain", "Gain Muscle"),
 });
 const loginSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),

@@ -1,27 +1,49 @@
-## GoIT Node.js Course Template Homework
+## Node.js project
+Registration :
+User :
+1 name
+2 email
+3 password
 
-Виконайте форк цього репозиторію для виконання домашніх завдань (2-6)
-Форк створить репозиторій на вашому http://github.com
+you goal :
 
-Додайте ментора до колаборації
+1 Lose Fat
+2 Maintain
+3 Gain Muscle
 
-Для кожної домашньої роботи створюйте свою гілку.
+Gender :
+1 Male
+2 Famale
+3 Age
 
-- hw02
-- hw03
-- hw04
-- hw05
-- hw06
+Body params:
 
-Кожна нова гілка для др повинна робитися з master
+1 Height
+2 Weight
 
-Після того, як ви закінчили виконувати домашнє завдання у своїй гілці, необхідно зробити пулл-реквест (PR). Потім додати ментора для рев'ю коду. Тільки після того, як ментор заапрувить PR, ви можете виконати мердж гілки з домашнім завданням у майстер.
+Your Activity :
 
-Уважно читайте коментарі ментора. Виправте зауваження та зробіть коміт у гілці з домашнім завданням. Зміни підтягнуться у PR автоматично після того, як ви відправите коміт з виправленнями на github
-Після виправлення знову додайте ментора на рев'ю коду.
+1   1.2 - if you do not have physical activity and sedentary work
+2   1,375 - if you do short runs or light gymnastics 1-3 times a week
+3   1.55 - if you play sports with average loads 3-5 times a week
+4   1,725 ​​- if you train fully 6-7 times a week
+5   1.9 - if your work is related to physical labor, you train 2 times a day and include strength exercises in your training program
 
-- При здачі домашньої роботи є посилання на PR
-- JS-код чистий та зрозумілий, для форматування використовується Prettier
+Products :
+
+1 Water
+
+2 Food
+
+========================================================
+
+
+Controllers:
+1 User +
+2 Products ()
+3 Today - оновлення прийому всіх продуктів  , ваги , води.
+
+
 
 ### Команди:
 
