@@ -23,13 +23,14 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Password is required"],
     },
-    youGoal: {
+    goal: {
       type: String,
       enum: ["Lose Fat", "Maintain", "Gain Muscle"],
       default: "Lose Fat",
     },
     gender: {
       type: String,
+      enum: ["male", "female"],
       default: null,
     },
     age: {
@@ -64,7 +65,7 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
-   },
+  },
 
   { versionKey: false, timestamps: true }
 );
@@ -75,7 +76,12 @@ const registerSchema = Joi.object({
   name: Joi.string().min(2).max(30).required(),
   email: Joi.string().pattern(emailRegexp).required(),
   password: Joi.string().min(6).required(),
-  youGoal: Joi.string().valid("Lose Fat", "Maintain", "Gain Muscle"),
+  goal: Joi.string().valid("Lose Fat", "Maintain", "Gain Muscle"),
+  gender: Joi.string().valid("male", "female"),
+  age: Joi.number(),
+  height: Joi.number(),
+  weight: Joi.number(),
+  activity: Joi.string(),
 });
 
 const loginSchema = Joi.object({
