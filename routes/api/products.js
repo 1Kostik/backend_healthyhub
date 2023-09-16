@@ -2,6 +2,7 @@ const express = require("express");
 const {
   createProducts  
 } = require("../../controllers");
+
 const { validateBody, authenticate } = require("../../middlewares");
 const { productSchemas } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
@@ -13,4 +14,5 @@ router.post(
     validateBody(productSchemas.addProduct),
     ctrlWrapper(createProducts)
   );
+
 module.exports = router;
