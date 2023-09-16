@@ -11,7 +11,7 @@ const authRouter = require("./routes/api/auth");
 const userProducts = require("./routes/api/products");
 const userRouter = require("./routes/api/users");
 
-// const waterRouter = require("./routes/api/water");
+const waterRouter = require("./routes/api/water");
 
 const app = express();
 app.use("/avatars", express.static(path.join(__dirname, "public", "avatars")));
@@ -26,7 +26,7 @@ app.use("/api/users", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/user", userProducts);
 
-// app.use("/api/water", waterRouter);
+app.use("/api/water", waterRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found my page!" });

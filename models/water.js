@@ -17,9 +17,10 @@ const waterSchema = Schema(
 );
 
 const addWater = Joi.object({
-  water: Joi.array().items(Joi.number()),
+  water: Joi.number().required(),
+  owner: Joi.string().required(),
 });
-const SchemaWater = { addWater };
+
 const Water = model("water", waterSchema);
 
-module.exports = { Water, SchemaWater };
+module.exports = { Water, addWater };

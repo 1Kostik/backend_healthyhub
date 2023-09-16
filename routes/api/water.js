@@ -3,7 +3,7 @@ const router = express.Router();
 const {
   createWaterRecord,
   getWaterByOwner,
-} = require("../../controllers/wate");
+} = require("../../controllers/water");
 
 router.post("/", createWaterRecord);
 router.get("/:ownerId", getWaterByOwner);
