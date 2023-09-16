@@ -1,16 +1,16 @@
 const express = require("express");
 const {
-    addProduct  
-} = require("../../controllers");
+    addWeight
+} = require("../../controllers/weight");
 const { validateBody, authenticate } = require("../../middlewares");
-const { productSchemas } = require("../../models");
+const { schemaWeight } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 const router = express.Router();
 
 router.post(
-    "/food-intake",
+    "/weigth",
     // authenticate,
-    validateBody(productSchemas.addProduct),
-    ctrlWrapper(addProduct)
+    validateBody(schemaWeight.addWeight),
+    ctrlWrapper(addWeight)
   );
 module.exports = router;

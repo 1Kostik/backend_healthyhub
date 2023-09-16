@@ -1,11 +1,14 @@
 const { Schema, model } = require("mongoose");
+const Joi = require("joi");
 
 const weightSchema = Schema(
-  {  
-    weight: {
-      type: Number,
-      default: 0,
-    },  
+  {
+    weight: [
+      {
+        type: Number,
+        default: 0,
+      },
+    ],
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
@@ -15,6 +18,11 @@ const weightSchema = Schema(
   { versionKey: false, timestamps: true }
 );
 
+const addWeight = Joi.object({
+  weight: Joi.array().items(Joi.number())
+});
+
+const schemaWeight = { addWeight };
 const Weight = model("weight", weightSchema);
 
-module.exports = Weight;
+module.exports = { Weight, schemaWeight };

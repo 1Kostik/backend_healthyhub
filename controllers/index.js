@@ -7,9 +7,11 @@ const {
   verify,
   resendVerifyEmail,
 } = require("./auth");
-const {addProduct}=require("./products")
+const { addProduct } = require("./products");
 const { uploadAvatar } = require("./user");
+const { addWeight } = require("./weight");
 module.exports = {
+  addWeight,
   addProduct,
   verify,
   resendVerifyEmail,

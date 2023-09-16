@@ -89,11 +89,11 @@ const userUpdate = Joi.object({
   age: Joi.number().required(),
 });
 
-const schemas = { loginSchema, registerSchema, userUpdate };
+const userSchemas = { loginSchema, registerSchema, userUpdate };
 
 const User = model("user", userSchema);
 
 module.exports = {
   User,
-  schemas,
+  userSchemas,
 };

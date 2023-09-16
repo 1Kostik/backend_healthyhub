@@ -1,13 +1,14 @@
-const { Products,schema } = require("./products");
-const { User, schemas } = require("./user");
+const { Products,productSchemas} = require("./products");
+const { User, userSchemas } = require("./user");
 const { Water } = require("./water");
-const { Weight } = require("./weight");
+const { Weight,schemaWeight } = require("./weight");
 
 module.exports = {
   User,
-  schema,
-  schemas,
+  productSchemas,
+  userSchemas,
   Products,
   Water,
-  Weight
+  Weight,
+  schemaWeight
 };
