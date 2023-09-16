@@ -1,2 +1,3 @@
-const { addWeight } = require("./addWeight");
-module.exports = { addWeight };
+const updateWeight = require("./updateWeight");
+const createWeight = require("./createWeight");
+module.exports = { updateWeight, createWeight };

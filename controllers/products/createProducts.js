@@ -1,7 +1,7 @@
 const { Products } = require("../../models");
 
 
-const addProduct = async (req, res, next) => {
+const createProducts = async (req, res, next) => {
   console.log(req.body)
   // const { _id: owner } = req.user;
   const body = req.body;
@@ -14,5 +14,5 @@ const addProduct = async (req, res, next) => {
     },
   });
 };
-module.exports = addProduct;
+module.exports = createProducts;
 // hi 
