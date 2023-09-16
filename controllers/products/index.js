@@ -1,14 +1,15 @@
-// const getAll = require("./getAll");
+const createProducts = require("./createProducts");
+const addProducts = require("./addProducts");
 // const getById = require("./getById");
 // const deleteById = require("./deleteById");
 // const updateById = require("./updateById");
-const addProduct = require("./addProduct");
 // const updateFavorite = require("./updateFavorite");
 
 module.exports = {
   // updateFavorite,
   // updateById,
-  addProduct,
+  createProducts,
+  addProducts,
   // deleteById,
   // getById,
   // getAll,

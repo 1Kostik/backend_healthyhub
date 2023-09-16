@@ -1,6 +1,6 @@
 const express = require("express");
 const {
-    addProduct  
+  createProducts  
 } = require("../../controllers");
 const { validateBody, authenticate } = require("../../middlewares");
 const { productSchemas } = require("../../models");
@@ -11,6 +11,6 @@ router.post(
     "/food-intake",
     // authenticate,
     validateBody(productSchemas.addProduct),
-    ctrlWrapper(addProduct)
+    ctrlWrapper(createProducts)
   );
 module.exports = router;

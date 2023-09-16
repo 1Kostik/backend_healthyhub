@@ -1,16 +1,23 @@
 const express = require("express");
 const {
-    addWeight
-} = require("../../controllers/weight");
+  updateWeight,createWeight
+} = require("../../controllers");
 const { validateBody, authenticate } = require("../../middlewares");
 const { schemaWeight } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 const router = express.Router();
 
 router.post(
-    "/weigth",
+    "/weight",
     // authenticate,
     validateBody(schemaWeight.addWeight),
-    ctrlWrapper(addWeight)
+    ctrlWrapper(createWeight)
+  );
+
+router.put(
+    "/weight/:id",
+    // authenticate,
+    validateBody(schemaWeight.addWeight),
+    ctrlWrapper(updateWeight)
   );
 module.exports = router;
