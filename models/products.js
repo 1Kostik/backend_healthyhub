@@ -2,51 +2,51 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
 const productSchema = Schema(
-  {
-    breakfast: [
-      {
-        name: { type: String },
-        carbohydrates: { type: Number },
-        protein: { type: Number },
-        fat: { type: Number },
-        calories: { type: Number },
-      },
-    ],
+  { breakfast: [
+    {
+      name: { type: String },
+      carbohydrates: { type: Number },
+      protein: { type: Number },
+      fat: { type: Number },
+      calories: { type: Number },
+    },
+  ],
+
+
+  dinner: [
+    {
+      name: { type: String },
+      carbohydrates: { type: Number },
+      protein: { type: Number },
+      fat: { type: Number },
+      calories: { type: Number },
+    },
+  ],
+
+
+  snack: [
+    {
+      name: { type: String },
+      carbohydrates: { type: Number },
+      protein: { type: Number },
+      fat: { type: Number },
+      calories: { type: Number },
+    },
+  ],
+
+
+  lunch: [
+    {
+      name: { type: String },
+      carbohydrates: { type: Number },
+      protein: { type: Number },
+      fat: { type: Number },
+      calories: { type: Number },
+    },
+  ],
   },
-  {
-    dinner: [
-      {
-        name: { type: String },
-        carbohydrates: { type: Number },
-        protein: { type: Number },
-        fat: { type: Number },
-        calories: { type: Number },
-      },
-    ],
-  },
-  {
-    snack: [
-      {
-        name: { type: String },
-        carbohydrates: { type: Number },
-        protein: { type: Number },
-        fat: { type: Number },
-        calories: { type: Number },
-      },
-    ],
-  },
-  {
-    lunch: [
-      {
-        name: { type: String },
-        carbohydrates: { type: Number },
-        protein: { type: Number },
-        fat: { type: Number },
-        calories: { type: Number },
-      },
-    ],
-  },
-  { versionKey: false, timestamps: true }
+{ versionKey: false, timestamps: true} 
+   
 
   // owner: {
   //   type: Schema.Types.ObjectId,
@@ -85,8 +85,8 @@ const addProduct = Joi.object({
   }),
 });
 
-const schema = { addProduct };
+const productSchemas = { addProduct };
 
 const Products = model("product", productSchema);
 
-module.exports = { Products, schema };
+module.exports = { Products, productSchemas };

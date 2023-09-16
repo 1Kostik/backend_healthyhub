@@ -9,23 +9,23 @@ const {
   updateSubscriptionUser,
 } = require("../../controllers");
 const { validateBody, authenticate } = require("../../middlewares");
-const { schemas } = require("../../models");
+const { userSchemas } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 const router = express.Router();
 router.post(
   "/register",
-  validateBody(schemas.registerSchema),
+  validateBody(userSchemas.registerSchema),
   ctrlWrapper(register)
 );
 router.get("/verify/:token",ctrlWrapper(verify));
-router.post('/verify', validateBody(schemas.emailSchema), ctrlWrapper(resendVerifyEmail));
-router.post("/login", validateBody(schemas.loginSchema), ctrlWrapper(login));
+router.post('/verify', validateBody(userSchemas.emailSchema), ctrlWrapper(resendVerifyEmail));
+router.post("/login", validateBody(userSchemas.loginSchema), ctrlWrapper(login));
 router.post("/logout", authenticate, ctrlWrapper(logout));
 router.get("/current", authenticate, ctrlWrapper(current));
 router.patch(
   "/",
   authenticate,
-  validateBody(schemas.updateSubscriptionSchema),
+  validateBody(userSchemas.updateSubscriptionSchema),
   ctrlWrapper(updateSubscriptionUser)
 );
 module.exports = router;

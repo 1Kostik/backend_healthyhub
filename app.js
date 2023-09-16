@@ -8,9 +8,9 @@ const swaggerDocument = require("./swagger.json");
 const logger = require("morgan");
 const cors = require("cors");
 const authRouter = require("./routes/api/auth");
-const userProducts = require("./routes/api/products");
+const userProducts= require("./routes/api/products")
+const userWeight= require("./routes/api/weight")
 const userRouter = require("./routes/api/users");
-
 const waterRouter = require("./routes/api/water");
 
 const app = express();
@@ -25,6 +25,7 @@ app.use(express.json());
 app.use("/api/users", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/user", userProducts);
+app.use("/api/user", userWeight);
 
 app.use("/api/water", waterRouter);
 
