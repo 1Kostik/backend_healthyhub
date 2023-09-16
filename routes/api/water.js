@@ -4,8 +4,9 @@ const {
   createWaterRecord,
   getWaterByOwner,
 } = require("../../controllers/water");
+const { ctrlWrapper } = require("../../utils");
 
-router.post("/", createWaterRecord);
-router.get("/:ownerId", getWaterByOwner);
+router.post("/", ctrlWrapper(createWaterRecord));
+router.get("/:ownerId", ctrlWrapper(getWaterByOwner));
 
 module.exports = router;
