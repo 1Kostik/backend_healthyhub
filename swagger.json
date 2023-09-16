@@ -1,30 +1,117 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "2.0.2",
+    "version": "1.0.0",
     "title": "HealthHub API",
-    "description": "Потрохи рухаємось 🙂",
-    "license": {
-      "name": "MIT",
-      "url": "https://opensource.org/licenses/MIT"
-    }
+    "description": "Потрохи рухаємось 🙂"
   },
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "servers": [{ "url": "http://localhost:3000" }],
+  "servers": [
+    {
+      "url": "https://backend-healthyhub.onrender.com/"
+    },
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
   "tags": [
     {
       "name": "Auth",
       "description": "Authorization endpoints"
+    },
+    {
+      "name": "Users",
+      "description": "User endpoints"
     }
   ],
   "paths": {
-    "/auth/register": {
+    "api/users/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User signin",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "User's email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "User's password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Signin's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SigninRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful signin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SigninResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid credentials)"
+          }
+        }
+      }
+    },
+    "api/users/register": {
       "post": {
         "tags": ["Auth"],
         "summary": "User registration",
-        "parameters": [],
-        "security": [{ "Bearer": [] }],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "User's name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "User's email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "User's password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -48,12 +135,47 @@
             }
           },
           "400": {
-            "description": "Bad request (invalid request body)",
-            "content": {}
+            "description": "Bad request (invalid request body)"
           },
           "409": {
-            "description": "Provided email already exists",
-            "content": {}
+            "description": "Provided email already exists"
+          }
+        }
+      }
+    },
+    "api/users/current": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get current user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "description": "User's id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized (invalid credentials)"
           }
         }
       }
@@ -62,6 +184,122 @@
   "components": {
     "schemas": {
       "RegistrationRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password",
+          "goal",
+          "age",
+          "gender",
+          "weight",
+          "height",
+          "activity"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          },
+          "goal": {
+            "type": "string",
+            "description": "User's goal",
+            "example": "Lose Fat",
+            "enum": ["Lose Fat", "Gain Muscle", "Maintain Weight"]
+          },
+          "age": {
+            "type": "integer",
+            "description": "User's age"
+          },
+          "gender": {
+            "type": "string",
+            "description": "User's gender",
+            "enum": ["Male", "Female", "Other"]
+          },
+          "weight": {
+            "type": "number",
+            "description": "User's weight"
+          },
+          "height": {
+            "type": "number",
+            "description": "User's height"
+          },
+          "activity": {
+            "type": "number",
+            "description": "User's activity level"
+          }
+        }
+      },
+      "RegistrationResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Status code"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status message"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "User's email"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              },
+              "goal": {
+                "type": "string",
+                "description": "User's goal"
+              },
+              "age": {
+                "type": "integer",
+                "description": "User's age"
+              },
+              "height": {
+                "type": "number",
+                "description": "User's height"
+              },
+              "weight": {
+                "type": "number",
+                "description": "User's weight"
+              },
+              "avatarUrl": {
+                "type": "string",
+                "description": "URL to user's avatar"
+              },
+              "gender": {
+                "type": "string",
+                "description": "User's gender"
+              },
+              "activity": {
+                "type": "string",
+                "description": "User's activity level"
+              }
+            }
+          },
+          "token": {
+            "type": "string",
+            "description": "Access token"
+          }
+        }
+      },
+      "SigninRequest": {
         "type": "object",
         "required": ["email", "password"],
         "properties": {
@@ -77,34 +315,117 @@
           }
         }
       },
-      "RegistrationResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
-            },
-            "userId": {
-              "type": "number",
-              "description": "User's id",
-              "example": "32143232436545474"
+      "SigninResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Status code"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status message"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "User's email"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name"
+              },
+              "goal": {
+                "type": "string",
+                "description": "User's goal"
+              },
+              "age": {
+                "type": "integer",
+                "description": "User's age"
+              },
+              "height": {
+                "type": "number",
+                "description": "User's height"
+              },
+              "weight": {
+                "type": "number",
+                "description": "User's weight"
+              },
+              "avatarUrl": {
+                "type": "string",
+                "description": "URL to user's avatar"
+              },
+              "gender": {
+                "type": "string",
+                "description": "User's gender"
+              },
+              "activity": {
+                "type": "string",
+                "description": "User's activity level"
+              }
             }
+          },
+          "token": {
+            "type": "string",
+            "description": "Access token"
           }
-        },
-        "example": [
-          { "email": "1@gmail.com", "userId": "1" },
-          { "email": "2@gmail.com", "userId": "2" }
-        ]
+        }
       }
-    },
-    "securitySchemes": {
-      "Bearer": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+    }
+  },
+  "CurrentUserResponse": {
+    "type": "object",
+    "properties": {
+      "code": {
+        "type": "integer",
+        "description": "Status code"
+      },
+      "status": {
+        "type": "string",
+        "description": "Status message"
+      },
+      "user": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name"
+          },
+          "goal": {
+            "type": "string",
+            "description": "User's goal"
+          },
+          "age": {
+            "type": "integer",
+            "description": "User's age"
+          },
+          "height": {
+            "type": "number",
+            "description": "User's height"
+          },
+          "weight": {
+            "type": "number",
+            "description": "User's weight"
+          },
+          "avatarUrl": {
+            "type": "string",
+            "description": "URL to user's avatar"
+          },
+          "gender": {
+            "type": "string",
+            "description": "User's gender"
+          },
+          "activity": {
+            "type": "string",
+            "description": "User's activity level"
+          }
+        }
       }
     }
   }
