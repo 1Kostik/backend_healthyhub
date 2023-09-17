@@ -23,9 +23,14 @@ const current = async (req, res) => {
       status: "success",
       code: 200,
       user: {
-        email: user.email,
         name: user.name,
+        email: user.email,
         goal: user.goal,
+        gender: user.gender,
+        age: user.age,
+        height: user.height,
+        weight: user.weight,
+        activity: user.activity,
       },
     });
   } catch (error) {
