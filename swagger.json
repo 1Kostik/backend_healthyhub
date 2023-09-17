@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "1.0.0",
+    "version": "1.1.2",
     "title": "HealthHub API",
-    "description": "Потрохи рухаємось 🙂"
+    "description": "Тут може бути Ваша реклама 🙂"
   },
   "servers": [
     {
@@ -24,61 +24,6 @@
     }
   ],
   "paths": {
-    "api/users/login": {
-      "post": {
-        "tags": ["Auth"],
-        "summary": "User signin",
-        "parameters": [
-          {
-            "name": "email",
-            "in": "query",
-            "description": "User's email",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "password",
-            "in": "query",
-            "description": "User's password",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "description": "Signin's object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SigninRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful signin",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SigninResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request (invalid request body)"
-          },
-          "401": {
-            "description": "Unauthorized (invalid credentials)"
-          }
-        }
-      }
-    },
     "api/users/register": {
       "post": {
         "tags": ["Auth"],
@@ -86,7 +31,7 @@
         "parameters": [
           {
             "name": "name",
-            "in": "query",
+            "in": "path",
             "description": "User's name",
             "required": true,
             "schema": {
@@ -95,7 +40,7 @@
           },
           {
             "name": "email",
-            "in": "query",
+            "in": "path",
             "description": "User's email",
             "required": true,
             "schema": {
@@ -104,7 +49,7 @@
           },
           {
             "name": "password",
-            "in": "query",
+            "in": "path",
             "description": "User's password",
             "required": true,
             "schema": {
@@ -143,6 +88,186 @@
         }
       }
     },
+    "api/users/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User signin",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "User's email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "path",
+            "description": "User's password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Signin's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SigninRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful signin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SigninResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid credentials)"
+          }
+        }
+      }
+    },
+    "api/users/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User logout",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "description": "User's id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful logout"
+          },
+          "401": {
+            "description": "Unauthorized (invalid credentials)"
+          }
+        }
+      }
+    },
+    "/verify/{token}": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "Verify email with token",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Email verification successful"
+          },
+          "400": {
+            "description": "Bad request (invalid token)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid token)"
+          }
+        }
+      }
+    },
+    "/verify": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Resend verification email",
+        "requestBody": {
+          "description": "Email object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Verification email resent successfully"
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid token)"
+          }
+        }
+      }
+    },
+    "api/users/forgot-password": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Forgot password",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "User's email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Email object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password reset email sent successfully"
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid token)"
+          }
+        }
+      }
+    },
+
     "api/users/current": {
       "get": {
         "tags": ["Users"],
@@ -179,10 +304,287 @@
           }
         }
       }
+    },
+    "/avatars": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Upload user avatar",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Avatar image file",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Avatar image file"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Avatar uploaded successfully"
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid token)"
+          },
+          "422": {
+            "description": "Unprocessable entity (image upload failed)"
+          }
+        }
+      }
+    },
+    "api/user/food-intake": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Add food intake for a user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "description": "User's id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Food intake object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FoodIntakeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Food intake added successfully"
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid token)"
+          }
+        }
+      }
+    },
+    "/api/user/food-intake/{id}": {
+      "put": {
+        "tags": ["Users"],
+        "summary": "Update food intake by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID of the food intake record",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Updated food intake information",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FoodIntakeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Food intake updated successfully"
+          },
+          "400": {
+            "description": "Bad request (invalid request body or ID)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid token)"
+          },
+          "404": {
+            "description": "Food intake record not found"
+          }
+        }
+      }
     }
   },
+
   "components": {
     "schemas": {
+      "EmailRequest": {
+        "type": "object",
+        "required": ["email"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          }
+        }
+      },
+      "FoodIntakeUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the food product"
+          },
+          "carbohydrates": {
+            "type": "number",
+            "description": "Amount of carbohydrates"
+          },
+          "protein": {
+            "type": "number",
+            "description": "Amount of protein"
+          },
+          "fat": {
+            "type": "number",
+            "description": "Amount of fat"
+          }
+        },
+        "description": "Data for updating information about food intake."
+      },
+      "FoodIntakeRequest": {
+        "type": "object",
+        "properties": {
+          "breakfast": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "carbohydrates": {
+                  "type": "number"
+                },
+                "protein": {
+                  "type": "number"
+                },
+                "fat": {
+                  "type": "number"
+                },
+                "calories": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "lunch": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "carbohydrates": {
+                  "type": "number"
+                },
+                "protein": {
+                  "type": "number"
+                },
+                "fat": {
+                  "type": "number"
+                },
+                "calories": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "snack": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "carbohydrates": {
+                  "type": "number"
+                },
+                "protein": {
+                  "type": "number"
+                },
+                "fat": {
+                  "type": "number"
+                },
+                "calories": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "dinner": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "carbohydrates": {
+                  "type": "number"
+                },
+                "protein": {
+                  "type": "number"
+                },
+                "fat": {
+                  "type": "number"
+                },
+                "calories": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "description": "Request to add food intake information for a user."
+      },
+      "FoodIntakeResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Status code"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status message"
+          }
+        },
+        "description": "Response after successfully adding food intake information for a user."
+      },
+
       "RegistrationRequest": {
         "type": "object",
         "required": [
@@ -375,6 +777,30 @@
       }
     }
   },
+  "EmailRequest": {
+    "type": "object",
+    "required": ["email"],
+    "properties": {
+      "email": {
+        "type": "string",
+        "description": "User's email",
+        "format": "email"
+      }
+    },
+    "description": "Send a new password to the user's email if it exists in the database."
+  },
+
+  "ForgotPasswordResponse": {
+    "type": "object",
+    "properties": {
+      "message": {
+        "type": "string",
+        "description": "A message indicating whether the password reset email was sent successfully or not."
+      }
+    },
+    "description": "Response indicating if the password reset email was sent."
+  },
+
   "CurrentUserResponse": {
     "type": "object",
     "properties": {
@@ -425,6 +851,29 @@
             "type": "string",
             "description": "User's activity level"
           }
+        }
+      }
+    },
+    "LogoutRequest": {
+      "type": "object",
+      "required": ["userId"],
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User's id"
+        }
+      }
+    },
+    "LogoutResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "description": "Status code"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status message"
         }
       }
     }
