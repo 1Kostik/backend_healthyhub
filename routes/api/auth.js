@@ -7,12 +7,17 @@ const {
   logout,
   current,
   updateSubscriptionUser,
-  resetPassword,
 } = require("../../controllers");
+const { resetPassword } = require("../../controllers/auth");
+const { checkEmail } = require("../../controllers/auth");
+
 const { validateBody, authenticate } = require("../../middlewares");
 const { userSchemas } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 const router = express.Router();
+
+router.post("/check-email", ctrlWrapper(checkEmail));
+
 router.post(
   "/register",
   validateBody(userSchemas.registerSchema),
@@ -29,8 +34,7 @@ router.post(
   validateBody(userSchemas.loginSchema),
   ctrlWrapper(login)
 );
-router.post("/reset-password", ctrlWrapper(resetPassword));
-
+router.post("/forgot-password", ctrlWrapper(resetPassword));
 router.post("/logout", authenticate, ctrlWrapper(logout));
 router.get("/current", authenticate, ctrlWrapper(current));
 router.patch(

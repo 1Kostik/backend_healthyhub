@@ -88,6 +88,57 @@
         }
       }
     },
+    "/api/users/check-email": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Check the presence of an email in the database",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "User's email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request to check an email",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailCheckRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Result of email verification",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailCheckResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error during email verification",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
     "api/users/login": {
       "post": {
         "tags": ["Auth"],
@@ -449,6 +500,27 @@
             "format": "email"
           }
         }
+      },
+      "EmailCheckRequest": {
+        "type": "object",
+        "required": ["email"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          }
+        }
+      },
+      "EmailCheckResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "A message indicating whether the email exists in the database or not."
+          }
+        },
+        "description": "Response indicating if the email exists in the database."
       },
       "FoodIntakeUpdateRequest": {
         "type": "object",
