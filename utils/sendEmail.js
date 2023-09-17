@@ -1,15 +1,16 @@
 const nodemailer = require("nodemailer");
 
 const transport = nodemailer.createTransport({
-  host: "sandbox.smtp.mailtrap.io",
-  port: 2525,
+  host: 'smtp.meta.ua',
+  port: 465,
+  secure: true,
   auth: {
-    user: process.env.MAILTRAP_USER,
-    pass: process.env.MAILTRAP_PASSWORD,
+    user: process.env.META_USER,
+    pass: process.env.META_PASSWORD,
   },
 });
 function sendEmail(message) {
-  message["from"] = "sorochankostya@gmail.com";
+  message["from"] = "sorochnkostya@meta.ua";
   return transport.sendMail(message);
 }
 module.exports = sendEmail;
