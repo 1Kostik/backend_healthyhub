@@ -44,15 +44,16 @@ const productSchema = Schema(
       calories: { type: Number },
     },
   ],
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
   },
 { versionKey: false, timestamps: true} 
    
 
-  // owner: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "user",
-  //   required: true,
-  // },
+ 
 );
 const addProduct = Joi.object({
   breakfast: Joi.array().items({

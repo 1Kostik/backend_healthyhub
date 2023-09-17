@@ -14,9 +14,9 @@ const login = async (req, res) => {
   if (!user) {
     throw HttpError(401, "Email or password invalid");
   }
-  if (user.verified !== true) {
-    return res.status(401).send({ message: "Please verify your email" });
-  }
+  // if (user.verified !== true) {
+  //   return res.status(401).send({ message: "Please verify your email" });
+  // }
   const passwordCompare = await bcrypt.compare(password, user.password);
 
   if (!passwordCompare) {
@@ -35,7 +35,7 @@ const login = async (req, res) => {
     token,
     user: {
       email: user.email,
-      // subscription: user.subscription,
+     // subscription: user.subscription,
     },
   });
 };

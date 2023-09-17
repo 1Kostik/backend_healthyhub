@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post(
     "/food-intake",
-    // authenticate,
+    authenticate,
     validateBody(productSchemas.addProduct),
     ctrlWrapper(createProducts)
   );
