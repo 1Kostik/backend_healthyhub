@@ -34,7 +34,14 @@ const login = async (req, res) => {
     code: 200,
     token,
     user: {
-      email: user.email,
+      name: user.name,
+        email: user.email,
+        goal: user.goal,
+        gender: user.gender,
+        age: user.age,
+        height: user.height,
+        weight: user.weight,
+        activity: user.activity,
      },
   });
 };
