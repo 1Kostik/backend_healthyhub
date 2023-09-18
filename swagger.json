@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "2.0.1",
+    "version": "2.1.1",
     "title": "HealthHub API",
     "description": "Тут може бути Ваша реклама 🙂"
   },
@@ -332,6 +332,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "security": [
@@ -365,6 +374,15 @@
             "in": "path",
             "name": "userId",
             "description": "User's id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
             "required": true,
             "schema": {
               "type": "string"
@@ -659,200 +677,7 @@
           }
         }
       },
-      "FoodIntakeUpdateRequest": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Name of the food product"
-          },
-          "carbohydrates": {
-            "type": "number",
-            "description": "Amount of carbohydrates"
-          },
-          "protein": {
-            "type": "number",
-            "description": "Amount of protein"
-          },
-          "fat": {
-            "type": "number",
-            "description": "Amount of fat"
-          }
-        },
-        "description": "Data for updating information about food intake."
-      },
-      "FoodIntakeRequest": {
-        "type": "object",
-        "properties": {
-          "breakfast": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "carbohydrates": {
-                  "type": "number"
-                },
-                "protein": {
-                  "type": "number"
-                },
-                "fat": {
-                  "type": "number"
-                },
-                "calories": {
-                  "type": "number"
-                }
-              }
-            }
-          },
-          "lunch": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "carbohydrates": {
-                  "type": "number"
-                },
-                "protein": {
-                  "type": "number"
-                },
-                "fat": {
-                  "type": "number"
-                },
-                "calories": {
-                  "type": "number"
-                }
-              }
-            }
-          },
-          "snack": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "carbohydrates": {
-                  "type": "number"
-                },
-                "protein": {
-                  "type": "number"
-                },
-                "fat": {
-                  "type": "number"
-                },
-                "calories": {
-                  "type": "number"
-                }
-              }
-            }
-          },
-          "dinner": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "carbohydrates": {
-                  "type": "number"
-                },
-                "protein": {
-                  "type": "number"
-                },
-                "fat": {
-                  "type": "number"
-                },
-                "calories": {
-                  "type": "number"
-                }
-              }
-            }
-          }
-        },
-        "description": "Request to add food intake information for a user."
-      },
-      "FoodIntakeResponse": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "integer",
-            "description": "Status code"
-          },
-          "status": {
-            "type": "string",
-            "description": "Status message"
-          }
-        },
-        "description": "Response after successfully adding food intake information for a user."
-      },
-
-      "RegistrationRequest": {
-        "type": "object",
-        "required": [
-          "name",
-          "email",
-          "password",
-          "goal",
-          "age",
-          "gender",
-          "weight",
-          "height",
-          "activity"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "User's name",
-            "example": "John Doe"
-          },
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email"
-          },
-          "password": {
-            "type": "string",
-            "description": "User's password",
-            "example": "qwerty123"
-          },
-          "goal": {
-            "type": "string",
-            "description": "User's goal",
-            "example": "Lose Fat",
-            "enum": ["Lose Fat", "Gain Muscle", "Maintain Weight"]
-          },
-          "age": {
-            "type": "integer",
-            "description": "User's age"
-          },
-          "gender": {
-            "type": "string",
-            "description": "User's gender",
-            "enum": ["Male", "Female", "Other"]
-          },
-          "weight": {
-            "type": "number",
-            "description": "User's weight"
-          },
-          "height": {
-            "type": "number",
-            "description": "User's height"
-          },
-          "activity": {
-            "type": "number",
-            "description": "User's activity level"
-          }
-        }
-      },
-      "RegistrationResponse": {
+      "CurrentUserResponse": {
         "type": "object",
         "properties": {
           "code": {
@@ -903,165 +728,357 @@
                 "description": "User's activity level"
               }
             }
-          },
-          "token": {
-            "type": "string",
-            "description": "Access token"
           }
-        }
-      },
-      "SigninRequest": {
-        "type": "object",
-        "required": ["email", "password"],
-        "properties": {
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email"
+        },
+        "FoodIntakeUpdateRequest": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name of the food product"
+            },
+            "carbohydrates": {
+              "type": "number",
+              "description": "Amount of carbohydrates"
+            },
+            "protein": {
+              "type": "number",
+              "description": "Amount of protein"
+            },
+            "fat": {
+              "type": "number",
+              "description": "Amount of fat"
+            }
           },
-          "password": {
-            "type": "string",
-            "description": "User's password",
-            "example": "qwerty123"
-          }
-        }
-      },
-      "SigninResponse": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "integer",
-            "description": "Status code"
-          },
-          "status": {
-            "type": "string",
-            "description": "Status message"
-          },
-          "user": {
-            "type": "object",
-            "properties": {
-              "email": {
-                "type": "string",
-                "description": "User's email"
-              },
-              "name": {
-                "type": "string",
-                "description": "User's name"
-              },
-              "goal": {
-                "type": "string",
-                "description": "User's goal"
-              },
-              "age": {
-                "type": "integer",
-                "description": "User's age"
-              },
-              "height": {
-                "type": "number",
-                "description": "User's height"
-              },
-              "weight": {
-                "type": "number",
-                "description": "User's weight"
-              },
-              "avatarUrl": {
-                "type": "string",
-                "description": "URL to user's avatar"
-              },
-              "gender": {
-                "type": "string",
-                "description": "User's gender"
-              },
-              "activity": {
-                "type": "string",
-                "description": "User's activity level"
+          "description": "Data for updating information about food intake."
+        },
+        "FoodIntakeRequest": {
+          "type": "object",
+          "properties": {
+            "breakfast": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "carbohydrates": {
+                    "type": "number"
+                  },
+                  "protein": {
+                    "type": "number"
+                  },
+                  "fat": {
+                    "type": "number"
+                  },
+                  "calories": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "lunch": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "carbohydrates": {
+                    "type": "number"
+                  },
+                  "protein": {
+                    "type": "number"
+                  },
+                  "fat": {
+                    "type": "number"
+                  },
+                  "calories": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "snack": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "carbohydrates": {
+                    "type": "number"
+                  },
+                  "protein": {
+                    "type": "number"
+                  },
+                  "fat": {
+                    "type": "number"
+                  },
+                  "calories": {
+                    "type": "number"
+                  }
+                }
+              }
+            },
+            "dinner": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "carbohydrates": {
+                    "type": "number"
+                  },
+                  "protein": {
+                    "type": "number"
+                  },
+                  "fat": {
+                    "type": "number"
+                  },
+                  "calories": {
+                    "type": "number"
+                  }
+                }
               }
             }
           },
-          "token": {
-            "type": "string",
-            "description": "Access token"
+          "description": "Request to add food intake information for a user."
+        },
+        "FoodIntakeResponse": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "Status code"
+            },
+            "status": {
+              "type": "string",
+              "description": "Status message"
+            }
+          },
+          "description": "Response after successfully adding food intake information for a user."
+        },
+
+        "RegistrationRequest": {
+          "type": "object",
+          "required": [
+            "name",
+            "email",
+            "password",
+            "goal",
+            "age",
+            "gender",
+            "weight",
+            "height",
+            "activity"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "example": "John Doe"
+            },
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "format": "email"
+            },
+            "password": {
+              "type": "string",
+              "description": "User's password",
+              "example": "qwerty123"
+            },
+            "goal": {
+              "type": "string",
+              "description": "User's goal",
+              "example": "Lose Fat",
+              "enum": ["Lose Fat", "Gain Muscle", "Maintain Weight"]
+            },
+            "age": {
+              "type": "integer",
+              "description": "User's age"
+            },
+            "gender": {
+              "type": "string",
+              "description": "User's gender",
+              "enum": ["Male", "Female", "Other"]
+            },
+            "weight": {
+              "type": "number",
+              "description": "User's weight"
+            },
+            "height": {
+              "type": "number",
+              "description": "User's height"
+            },
+            "activity": {
+              "type": "number",
+              "description": "User's activity level"
+            }
+          }
+        },
+        "RegistrationResponse": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "Status code"
+            },
+            "status": {
+              "type": "string",
+              "description": "Status message"
+            },
+            "user": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "User's email"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "User's name"
+                },
+                "goal": {
+                  "type": "string",
+                  "description": "User's goal"
+                },
+                "age": {
+                  "type": "integer",
+                  "description": "User's age"
+                },
+                "height": {
+                  "type": "number",
+                  "description": "User's height"
+                },
+                "weight": {
+                  "type": "number",
+                  "description": "User's weight"
+                },
+                "avatarUrl": {
+                  "type": "string",
+                  "description": "URL to user's avatar"
+                },
+                "gender": {
+                  "type": "string",
+                  "description": "User's gender"
+                },
+                "activity": {
+                  "type": "string",
+                  "description": "User's activity level"
+                }
+              }
+            },
+            "token": {
+              "type": "string",
+              "description": "Access token"
+            }
+          }
+        },
+        "SigninRequest": {
+          "type": "object",
+          "required": ["email", "password"],
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "format": "email"
+            },
+            "password": {
+              "type": "string",
+              "description": "User's password",
+              "example": "qwerty123"
+            }
+          }
+        },
+        "SigninResponse": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "integer",
+              "description": "Status code"
+            },
+            "status": {
+              "type": "string",
+              "description": "Status message"
+            },
+            "user": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "description": "User's email"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "User's name"
+                },
+                "goal": {
+                  "type": "string",
+                  "description": "User's goal"
+                },
+                "age": {
+                  "type": "integer",
+                  "description": "User's age"
+                },
+                "height": {
+                  "type": "number",
+                  "description": "User's height"
+                },
+                "weight": {
+                  "type": "number",
+                  "description": "User's weight"
+                },
+                "avatarUrl": {
+                  "type": "string",
+                  "description": "URL to user's avatar"
+                },
+                "gender": {
+                  "type": "string",
+                  "description": "User's gender"
+                },
+                "activity": {
+                  "type": "string",
+                  "description": "User's activity level"
+                }
+              }
+            },
+            "token": {
+              "type": "string",
+              "description": "Access token"
+            }
           }
         }
       }
-    }
-  },
-  "EmailRequest": {
-    "type": "object",
-    "required": ["email"],
-    "properties": {
-      "email": {
-        "type": "string",
-        "description": "User's email",
-        "format": "email"
-      }
     },
-    "description": "Send a new password to the user's email if it exists in the database."
-  },
-
-  "ForgotPasswordResponse": {
-    "type": "object",
-    "properties": {
-      "message": {
-        "type": "string",
-        "description": "A message indicating whether the password reset email was sent successfully or not."
-      }
-    },
-    "description": "Response indicating if the password reset email was sent."
-  },
-
-  "CurrentUserResponse": {
-    "type": "object",
-    "properties": {
-      "code": {
-        "type": "integer",
-        "description": "Status code"
-      },
-      "status": {
-        "type": "string",
-        "description": "Status message"
-      },
-      "user": {
-        "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "description": "User's email"
-          },
-          "name": {
-            "type": "string",
-            "description": "User's name"
-          },
-          "goal": {
-            "type": "string",
-            "description": "User's goal"
-          },
-          "age": {
-            "type": "integer",
-            "description": "User's age"
-          },
-          "height": {
-            "type": "number",
-            "description": "User's height"
-          },
-          "weight": {
-            "type": "number",
-            "description": "User's weight"
-          },
-          "avatarUrl": {
-            "type": "string",
-            "description": "URL to user's avatar"
-          },
-          "gender": {
-            "type": "string",
-            "description": "User's gender"
-          },
-          "activity": {
-            "type": "string",
-            "description": "User's activity level"
-          }
+    "EmailRequest": {
+      "type": "object",
+      "required": ["email"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "User's email",
+          "format": "email"
         }
-      }
+      },
+      "description": "Send a new password to the user's email if it exists in the database."
+    },
+
+    "ForgotPasswordResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "A message indicating whether the password reset email was sent successfully or not."
+        }
+      },
+      "description": "Response indicating if the password reset email was sent."
     },
     "LogoutRequest": {
       "type": "object",
