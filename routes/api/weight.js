@@ -1,6 +1,6 @@
 const express = require("express");
 const {
-  updateWeight,createWeight
+  updateWeight,createWeight,getAllWeight
 } = require("../../controllers");
 const { validateBody, authenticate } = require("../../middlewares");
 const { schemaWeight } = require("../../models");
@@ -8,7 +8,11 @@ const { ctrlWrapper } = require("../../utils");
 const router = express.Router();
 
 
-
+router.get(
+  "/weight/:ownerId",
+  authenticate,
+  ctrlWrapper(getAllWeight)
+);
 router.post(
     "/weight",
     authenticate,
