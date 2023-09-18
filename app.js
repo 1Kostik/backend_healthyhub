@@ -12,6 +12,7 @@ const userProducts= require("./routes/api/products")
 const userWeight= require("./routes/api/weight")
 const userRouter = require("./routes/api/users");
 const waterRouter = require("./routes/api/water");
+const recommendedFood = require("./routes/api/recommendedFood");
 
 const app = express();
 app.use("/avatars", express.static(path.join(__dirname, "public", "avatars")));
@@ -28,7 +29,7 @@ app.use("/api/user", userProducts);
 app.use("/api/user", userWeight);
 
 app.use("/api/water", waterRouter);
-
+app.use("/api/recommended-food", recommendedFood);
 app.use((req, res) => {
   res.status(404).json({ message: "Not found my page!" });
 });
