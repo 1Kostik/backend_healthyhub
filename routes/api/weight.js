@@ -7,16 +7,17 @@ const { schemaWeight } = require("../../models");
 const { ctrlWrapper } = require("../../utils");
 const router = express.Router();
 
+
+
 router.post(
     "/weight",
-    // authenticate,
+    authenticate,
     validateBody(schemaWeight.addWeight),
     ctrlWrapper(createWeight)
   );
-
 router.put(
     "/weight/:id",
-    // authenticate,
+    authenticate,
     validateBody(schemaWeight.addWeight),
     ctrlWrapper(updateWeight)
   );

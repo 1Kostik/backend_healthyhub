@@ -23,6 +23,6 @@ async function uploadAvatar(req, res, next) {
     next(HttpError(404));
   }
 }
-module.exports = {
-  uploadAvatar,
-};
+module.exports = 
+  uploadAvatar
+;

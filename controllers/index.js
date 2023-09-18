@@ -7,14 +7,15 @@ const {
   verify,
   resendVerifyEmail,
 } = require("./auth");
-const { addProducts, createProducts } = require("./products");
-const { uploadAvatar } = require("./user");
+const { updateProducts, createProducts,getAllProducts} = require("./products");
+const { uploadAvatar,updateUserInfo } = require("./user");
 const { updateWeight, createWeight } = require("./weight");
+const { createWaterRecord, getWaterByOwner, updateWater } = require("./water");
 module.exports = {
   createWeight,
   createProducts,
   updateWeight,
-  addProducts,
+  updateProducts,
   verify,
   resendVerifyEmail,
   uploadAvatar,
@@ -23,4 +24,9 @@ module.exports = {
   updateSubscriptionUser,
   register,
   login,
+  createWaterRecord,
+  getWaterByOwner,
+  updateWater,
+  getAllProducts,
+  updateUserInfo
 };

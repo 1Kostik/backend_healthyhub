@@ -1,8 +1,9 @@
 const path = require("path");
 const express = require("express");
-const UserController = require("../../controllers/user");
+const {uploadAvatar,updateUserInfo} = require("../../controllers/user");
 const { authenticate,resize } = require("../../middlewares");
 const multer = require("multer");
+const { ctrlWrapper } = require("../../utils");
 
 
 const router = express.Router();
@@ -25,8 +26,13 @@ const upload = multer({ storage });
 router.patch(
   "/avatar",
   authenticate,
-  upload.single("avatar"),resize,
-  UserController.uploadAvatar
+  upload.single("avatar"),resize,  
+  ctrlWrapper(uploadAvatar)
+);
+router.patch(
+  "/update",
+  authenticate,
+  ctrlWrapper(updateUserInfo)
 );
 
 
