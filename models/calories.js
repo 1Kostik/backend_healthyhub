@@ -11,20 +11,19 @@ const caloriesSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: "user",
       required: true,
-      date:{
-        type: String,
-      }
+    },
+    date: {
+      type: String,
     },
   },
   { versionKey: false, timestamps: true }
 );
 
-const addCalories = Joi.object({
-  water: Joi.number().required(),
-  owner: Joi.string().required(),
-  date:Joi.string().required()
+const addCaloriesShema = Joi.object({
+  calories: Joi.number().required(),
+  date: Joi.string().required(),
 });
 
 const Calories = model("calories", caloriesSchema);
 
-module.exports = { Calories, addCalories };
+module.exports = { Calories, addCaloriesShema };

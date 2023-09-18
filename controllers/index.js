@@ -12,8 +12,8 @@ const {
   createProducts,
   getAllProducts,
 } = require("./products");
-const { uploadAvatar, updateUserInfo } = require("./user");
-const { updateWeight, createWeight } = require("./weight");
+const { uploadAvatar, updateUserInfo,getAllUserInfo } = require("./user");
+const { updateWeight, createWeight,getAllWeight } = require("./weight");
 const { createWaterRecord, getWaterByOwner, updateWater } = require("./water");
 const {
   updateCalories,
@@ -21,6 +21,8 @@ const {
   getAllCalories,
 } = require("./calories");
 module.exports = {
+  getAllUserInfo,
+  getAllWeight,
   createWeight,
   createProducts,
   updateWeight,
