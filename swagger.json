@@ -421,7 +421,7 @@
         }
       }
     },
-    "/avatars": {
+    "/api/users/avatar": {
       "patch": {
         "tags": ["Users"],
         "summary": "Upload user avatar",
