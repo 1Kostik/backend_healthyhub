@@ -7,6 +7,7 @@ const {
   logout,
   current,
   updateSubscriptionUser,
+  updateUserProfile,
 } = require("../../controllers");
 const { resetPassword } = require("../../controllers/auth");
 const { checkEmail } = require("../../controllers/auth");
@@ -37,6 +38,7 @@ router.post(
 router.post("/forgot-password", ctrlWrapper(resetPassword));
 router.post("/logout", authenticate, ctrlWrapper(logout));
 router.get("/current", authenticate, ctrlWrapper(current));
+router.patch("/update-profile", authenticate, ctrlWrapper(updateUserProfile));
 router.patch(
   "/",
   authenticate,

@@ -7,6 +7,7 @@ const resendVerifyEmail = require("./resendVerifyEmail");
 const verify = require("./verify");
 const { resetPassword } = require("./reset-password");
 const { checkEmail } = require("./checkEmail");
+const { updateUserProfile } = require("./updateUserProfile");
 module.exports = {
   verify,
   resendVerifyEmail,
@@ -17,4 +18,5 @@ module.exports = {
   logout,
   resetPassword,
   checkEmail,
+  updateUserProfile,
 };
