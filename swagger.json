@@ -470,6 +470,44 @@
         }
       }
     },
+
+    "/api/recommended-food": {
+      "get": {
+        "tags": ["Recommended Food"],
+        "summary": "Get food recommendations",
+        "description": "Retrieve a list of recommended food items.",
+        "responses": {
+          "200": {
+            "description": "Successful request. Returns a list of recommended food items.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "name": "Apples",
+                  "amount": "100 g",
+                  "img": "https://res.cloudinary.com/dec1shvoo/image/upload/v1692479041/Your%20health/pngfind.com-apple-png-1037796_udjai9.png",
+                  "calories": 52,
+                  "nutrition": {
+                    "carbohydrates": 14,
+                    "protein": 0.3,
+                    "fat": 0.2
+                  }
+                },
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Food"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error. Unable to retrieve food recommendations."
+          }
+        }
+      }
+    },
+
     "api/user/food-intake": {
       "post": {
         "tags": ["Users"],
@@ -555,6 +593,44 @@
 
   "components": {
     "schemas": {
+      "Food": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the food product"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Amount of the food product"
+          },
+          "img": {
+            "type": "string",
+            "description": "Image of the food product"
+          },
+          "calories": {
+            "type": "number",
+            "description": "Amount of calories in the food product"
+          },
+          "nutrition": {
+            "type": "object",
+            "properties": {
+              "carbohydrates": {
+                "type": "number",
+                "description": "Amount of carbohydrates in the food product"
+              },
+              "protein": {
+                "type": "number",
+                "description": "Amount of protein in the food product"
+              },
+              "fat": {
+                "type": "number",
+                "description": "Amount of fat in the food product"
+              }
+            }
+          }
+        }
+      },
       "EmailRequest": {
         "type": "object",
         "required": ["email"],
