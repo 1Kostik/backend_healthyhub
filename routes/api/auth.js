@@ -7,6 +7,7 @@ const {
   logout,
   current,
   updateSubscriptionUser,
+  updateUserProfile,
 } = require("../../controllers");
 const { resetPassword } = require("../../controllers/auth");
 const { checkEmail } = require("../../controllers/auth");
