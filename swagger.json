@@ -21,6 +21,10 @@
     {
       "name": "Users",
       "description": "User endpoints"
+    },
+    {
+      "name": "Recommended Food",
+      "description": "Recommended food endpoints"
     }
   ],
   "paths": {
