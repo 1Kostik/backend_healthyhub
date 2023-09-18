@@ -356,6 +356,53 @@
         }
       }
     },
+    "/api/users/update": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Update user's information",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "description": "User's id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Updated user's information",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User's information updated successfully"
+          },
+          "400": {
+            "description": "Bad request (invalid request body or ID)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid token)"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
     "/avatars": {
       "patch": {
         "tags": ["Users"],
@@ -501,6 +548,19 @@
           }
         }
       },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Status code"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status message"
+          }
+        }
+      },
       "EmailCheckRequest": {
         "type": "object",
         "required": ["email"],
@@ -521,6 +581,83 @@
           }
         },
         "description": "Response indicating if the email exists in the database."
+      },
+      "UpdateUserInfoRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the user."
+          },
+          "goal": {
+            "type": "string",
+            "description": "The user's goal."
+          },
+          "gender": {
+            "type": "string",
+            "description": "The user's gender."
+          },
+          "age": {
+            "type": "integer",
+            "description": "The user's age."
+          },
+          "height": {
+            "type": "number",
+            "description": "The user's height in centimeters."
+          },
+          "weight": {
+            "type": "number",
+            "description": "The user's weight in kilograms."
+          },
+          "activity": {
+            "type": "string",
+            "description": "The user's activity level."
+          }
+        },
+        "description": "Data for updating information about a user."
+      },
+
+      "UpdateUserInfoResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "The status of the response (e.g., 'success')."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The user's updated name."
+              },
+              "goal": {
+                "type": "string",
+                "description": "The user's updated goal."
+              },
+              "gender": {
+                "type": "string",
+                "description": "The user's updated gender."
+              },
+              "age": {
+                "type": "integer",
+                "description": "The user's updated age."
+              },
+              "height": {
+                "type": "number",
+                "description": "The user's updated height in centimeters."
+              },
+              "weight": {
+                "type": "number",
+                "description": "The user's updated weight in kilograms."
+              },
+              "activity": {
+                "type": "string",
+                "description": "The user's updated activity level."
+              }
+            }
+          }
+        }
       },
       "FoodIntakeUpdateRequest": {
         "type": "object",
