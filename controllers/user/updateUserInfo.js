@@ -1,6 +1,4 @@
-const jwt = require("jsonwebtoken");
 const { User } = require("../../models");
-const { SECRET_KEY } = process.env;
 
 const updateUserInfo = async (req, res) => {
   const { _id: id } = req.user;
