@@ -12,7 +12,7 @@ const updateUserInfo = async (req, res) => {
   const id = decoded.id;
 
   const body = req.body;
-  const updateUserInfo = await User.findByIdAndUpdate(id, body, { new: true });
+  const updateUserInfo = await User.findByIdAndUpdate(id,...body, { new: true });
   res.status(200).json({
     status: "success",
     data: {
