@@ -17,8 +17,6 @@ async function resetPassword(req, res) {
   const newPassword = crypto.randomBytes(8).toString("hex");
 
   const unhashedPassword = newPassword;
-  console.log("unhashedPassword", unhashedPassword);
-
   const hashPassword = await bcrypt.hash(newPassword, 10);
   user.password = hashPassword;
 

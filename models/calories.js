@@ -25,6 +25,6 @@ const addCalories = Joi.object({
   date:Joi.string().required()
 });
 
-const Calories = model("water", caloriesSchema);
+const Calories = model("calories", caloriesSchema);
 
 module.exports = { Calories, addCalories };
