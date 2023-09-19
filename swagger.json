@@ -28,7 +28,7 @@
     }
   ],
   "paths": {
-    "api/users/register": {
+    "/api/users/register": {
       "post": {
         "tags": ["Auth"],
         "summary": "User registration",
@@ -143,7 +143,7 @@
       }
     },
 
-    "api/users/login": {
+    "/api/users/login": {
       "post": {
         "tags": ["Auth"],
         "summary": "User signin",
@@ -198,7 +198,7 @@
         }
       }
     },
-    "api/users/logout": {
+    "/api/users/logout": {
       "post": {
         "tags": ["Auth"],
         "summary": "User logout",
@@ -283,7 +283,7 @@
         }
       }
     },
-    "api/users/forgot-password": {
+    "/api/users/forgot-password": {
       "post": {
         "tags": ["Auth"],
         "summary": "Forgot password",
@@ -323,7 +323,7 @@
       }
     },
 
-    "api/users/current": {
+    "/api/users/current": {
       "get": {
         "tags": ["Users"],
         "summary": "Get current user",
@@ -512,7 +512,7 @@
       }
     },
 
-    "api/user/food-intake": {
+    "/api/user/food-intake": {
       "post": {
         "tags": ["Users"],
         "summary": "Add food intake for a user",
@@ -668,7 +668,8 @@
             "description": "User's email",
             "format": "email"
           }
-        }
+        },
+        "description": "Send a new password to the user's email if it exists in the database."
       },
       "EmailCheckResponse": {
         "type": "object",
@@ -1135,51 +1136,39 @@
             }
           }
         }
-      }
-    },
-    "EmailRequest": {
-      "type": "object",
-      "required": ["email"],
-      "properties": {
-        "email": {
-          "type": "string",
-          "description": "User's email",
-          "format": "email"
-        }
       },
-      "description": "Send a new password to the user's email if it exists in the database."
-    },
 
-    "ForgotPasswordResponse": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "A message indicating whether the password reset email was sent successfully or not."
+      "ForgotPasswordResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "A message indicating whether the password reset email was sent successfully or not."
+          }
+        },
+        "description": "Response indicating if the password reset email was sent."
+      },
+      "LogoutRequest": {
+        "type": "object",
+        "required": ["userId"],
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "User's id"
+          }
         }
       },
-      "description": "Response indicating if the password reset email was sent."
-    },
-    "LogoutRequest": {
-      "type": "object",
-      "required": ["userId"],
-      "properties": {
-        "userId": {
-          "type": "string",
-          "description": "User's id"
-        }
-      }
-    },
-    "LogoutResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "description": "Status code"
-        },
-        "status": {
-          "type": "string",
-          "description": "Status message"
+      "LogoutResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Status code"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status message"
+          }
         }
       }
     }
