@@ -28,7 +28,7 @@ const current = async (req, res) => {
         height: user.height,
         weight: user.weight,
         activity: user.activity,
-        avatar: user.avatar,
+        avatar: user.avatarURL,
       },
     });
   } catch (error) {
