@@ -4,6 +4,7 @@ const { BASE_URL } = process.env;
 const { User } = require("../../models");
 const { HttpError } = require("../../utils");
 const sendEmail = require("../../utils/sendEmail");
+const gravatar = require("gravatar");
 
 const register = async (req, res) => {
   const { email, password, name } = req.body;
@@ -13,10 +14,13 @@ const register = async (req, res) => {
   }
   const hashPassword = await bcrypt.hash(password, 10);
   const verifyToken = crypto.randomUUID();
+  const avatarURL = gravatar.url(email);
+
   const newUser = await User.create({
     ...req.body,
     password: hashPassword,
     verifyToken,
+    avatarURL,
   });
   await sendEmail({
     to: email,
@@ -29,6 +33,7 @@ const register = async (req, res) => {
   res.status(201).json({
     email: newUser.email,
     name: newUser.name,
+    avatarURL: newUser.avatarURL,
   });
 };
 module.exports = register;
