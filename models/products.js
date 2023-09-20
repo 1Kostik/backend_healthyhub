@@ -47,6 +47,9 @@ const productSchema = Schema(
       ref: "user",
       required: true,
     },
+    date: {
+      type: String,
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -55,6 +58,13 @@ const addProduct = Joi.object({
   lunch: Joi.array(),
   snack: Joi.array(),
   dinner: Joi.array(),
+  date:Joi.string(),
+});
+const createProduct = Joi.object({
+  breakfast: Joi.object(),
+  lunch: Joi.object(),
+  snack: Joi.object(),
+  dinner: Joi.object(),
 });
 /*
 .Joi.array().items({
@@ -64,7 +74,7 @@ const addProduct = Joi.object({
     fat: Joi.number(),
     calories: Joi.number(),
   })*/
-const productSchemas = { addProduct };
+const productSchemas = { addProduct, createProduct };
 
 const Products = model("product", productSchema);
 
