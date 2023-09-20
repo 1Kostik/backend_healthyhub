@@ -15,9 +15,9 @@ const authenticate = async (req, res, next) => {
     if (!user || !user.token || user.token !== token) {
       next(HttpError(401));
     }
-    if (user.verified !== true) {
-      return res.status(401).send({ message: "You are not verify" });
-    }
+    // if (user.verified !== true) {
+    //   return res.status(401).send({ message: "You are not verify" });
+    // }
     req.user = user;
     next();
   } catch (error) {
