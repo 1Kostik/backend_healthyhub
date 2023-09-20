@@ -19,7 +19,7 @@ router.get(
 router.post(
   "/food-intake",
   authenticate,
-  validateBody(productSchemas.addProduct),
+  validateBody(productSchemas.createProduct),
   ctrlWrapper(createProducts)
 );
 router.put(

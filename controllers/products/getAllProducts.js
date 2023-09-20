@@ -1,18 +1,43 @@
 const { Products } = require("../../models");
-const { HttpError } = require("../../utils");
+const { formattedDate } = require("../../utils");
 
 const getAllProducts = async (req, res, next) => {
   const { _id: owner } = req.user;
 
-  const allProducts = await Products.find({ owner });
+  const currentDate = formattedDate();
 
-  if (allProducts.length === 0) {
-    throw HttpError(404, "Not found");
+  const userProducts = await Products.findOne({ owner });
+  const id = userProducts._id;
+
+  if (currentDate !== userProducts.date) {
+    const newProducts = await Products.findByIdAndUpdate(
+      id,
+      {
+        lunch: [],
+        snack: [],
+        dinner: [],
+        breakfast: [],
+        owner,
+        date: currentDate,
+      },
+      { new: true }
+    );
+
+    res.status(200).json({
+      status: "success",
+      code: 200,
+      data: {
+        newProducts,
+      },
+    });
+  } else {
+    res.status(200).json({
+      status: "success",
+      code: 200,
+      data: {
+        userProducts,
+      },
+    });
   }
-  res.json({
-    status: "success",
-    code: 200,
-    data: { allProducts },
-  });
 };
 module.exports = getAllProducts;

@@ -55,10 +55,10 @@ const userSchema = new Schema(
     },
     verified: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     activity: {
-      type: String,
+      type: Number,
       default: null,
     },
     avatarURL: {
