@@ -42,6 +42,7 @@ const login = async (req, res) => {
         height: user.height,
         weight: user.weight,
         activity: user.activity,
+        avatarURL: user.avatarURL,
      },
   });
 };
