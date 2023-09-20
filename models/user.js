@@ -73,9 +73,9 @@ const userSchema = new Schema(
 userSchema.post("save", handleMongooseError);
 
 const registerSchema = Joi.object({
-  name: Joi.string().min(2).max(30).required(),
+  name: Joi.string().min(2).max(16).required(),
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().min(6).max(12).required(),
   goal: Joi.string().valid("Lose Fat", "Maintain", "Gain Muscle"),
   gender: Joi.string().valid("male", "female"),
   age: Joi.number(),
