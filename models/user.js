@@ -49,14 +49,14 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
-    verifyToken: {
-      type: String,
-      default: null,
-    },
-    verified: {
-      type: Boolean,
-      default: false,
-    },
+    // verifyToken: {
+    //   type: String,
+    //   default: null,
+    // },
+    // verified: {
+    //   type: Boolean,
+    //   default: false,
+    // },
     activity: {
       type: Number,
       default: null,
