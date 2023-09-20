@@ -597,6 +597,156 @@
 
   "components": {
     "schemas": {
+      "RegistrationRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password",
+          "goal",
+          "age",
+          "gender",
+          "weight",
+          "height",
+          "activity"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          },
+          "goal": {
+            "type": "string",
+            "description": "User's goal",
+            "example": "Lose Fat",
+            "enum": ["Lose Fat", "Gain Muscle", "Maintain Weight"]
+          },
+          "age": {
+            "type": "integer",
+            "description": "User's age"
+          },
+          "gender": {
+            "type": "string",
+            "description": "User's gender",
+            "enum": ["male", "female"]
+          },
+          "weight": {
+            "type": "number",
+            "description": "User's weight"
+          },
+          "height": {
+            "type": "number",
+            "description": "User's height"
+          },
+          "activity": {
+            "type": "number",
+            "description": "User's activity level"
+          }
+        }
+      },
+      "RegistrationResponse": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 30
+          }
+        },
+        "required": ["email", "name"]
+      },
+      "SigninRequest": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "minLength": 6
+          }
+        },
+        "required": ["email", "password"]
+      },
+      "SigninResponse": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["success"]
+          },
+          "code": {
+            "type": "integer",
+            "enum": [200]
+          },
+          "token": {
+            "type": "string"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 30
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "goal": {
+                "type": "string",
+                "enum": ["Lose Fat", "Maintain", "Gain Muscle"]
+              },
+              "gender": {
+                "type": "string",
+                "enum": ["male", "female", null]
+              },
+              "age": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 150
+              },
+              "height": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 220
+              },
+              "weight": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 300
+              },
+              "activity": {
+                "type": "number",
+                "enum": []
+              }
+            },
+            "required": ["name", "email"]
+          }
+        },
+        "required": ["status", "code", "token", "user"]
+      },
+
       "Food": {
         "type": "object",
         "properties": {
@@ -944,123 +1094,6 @@
             }
           },
           "description": "Response after successfully adding food intake information for a user."
-        },
-
-        "RegistrationRequest": {
-          "type": "object",
-          "required": [
-            "name",
-            "email",
-            "password",
-            "goal",
-            "age",
-            "gender",
-            "weight",
-            "height",
-            "activity"
-          ],
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "User's name",
-              "example": "John Doe"
-            },
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
-            },
-            "password": {
-              "type": "string",
-              "description": "User's password",
-              "example": "qwerty123"
-            },
-            "goal": {
-              "type": "string",
-              "description": "User's goal",
-              "example": "Lose Fat",
-              "enum": ["Lose Fat", "Gain Muscle", "Maintain Weight"]
-            },
-            "age": {
-              "type": "integer",
-              "description": "User's age"
-            },
-            "gender": {
-              "type": "string",
-              "description": "User's gender",
-              "enum": ["Male", "Female", "Other"]
-            },
-            "weight": {
-              "type": "number",
-              "description": "User's weight"
-            },
-            "height": {
-              "type": "number",
-              "description": "User's height"
-            },
-            "activity": {
-              "type": "number",
-              "description": "User's activity level"
-            }
-          }
-        },
-        "RegistrationResponse": {
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "integer",
-              "description": "Status code"
-            },
-            "status": {
-              "type": "string",
-              "description": "Status message"
-            },
-            "user": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "type": "string",
-                  "description": "User's email"
-                },
-                "name": {
-                  "type": "string",
-                  "description": "User's name"
-                },
-                "goal": {
-                  "type": "string",
-                  "description": "User's goal"
-                },
-                "age": {
-                  "type": "integer",
-                  "description": "User's age"
-                },
-                "height": {
-                  "type": "number",
-                  "description": "User's height"
-                },
-                "weight": {
-                  "type": "number",
-                  "description": "User's weight"
-                },
-                "avatarUrl": {
-                  "type": "string",
-                  "description": "URL to user's avatar"
-                },
-                "gender": {
-                  "type": "string",
-                  "description": "User's gender"
-                },
-                "activity": {
-                  "type": "string",
-                  "description": "User's activity level"
-                }
-              }
-            },
-            "token": {
-              "type": "string",
-              "description": "Access token"
-            }
-          }
         },
         "SigninRequest": {
           "type": "object",
