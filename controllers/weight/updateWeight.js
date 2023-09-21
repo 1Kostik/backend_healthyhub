@@ -1,11 +1,11 @@
 const { Weight } = require("../../models");
-const { getCurrentDate } = require("../../utils");
+const { formattedDate } = require("../../utils");
 
 
 const updateWeight = async (req, res, next) => {
 const {_id:owner}=req.user;
   const body = req.body;
-  const currentDate=getCurrentDate();
+  const currentDate=formattedDate();
   try {
     const existingWeight = await Weight.findOne({ owner, date: currentDate });
     if (!existingWeight) {
