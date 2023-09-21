@@ -12,14 +12,16 @@ const {
   createProducts,
   getAllProducts,
 } = require("./products");
-const { uploadAvatar, updateUserInfo,getAllUserInfo } = require("./user");
-const { updateWeight, createWeight,getAllWeight } = require("./weight");
+const { uploadAvatar, updateUserInfo, getAllUserInfo } = require("./user");
+const { updateWeight, createWeight, getAllWeight } = require("./weight");
 const { createWaterRecord, getWaterByOwner, updateWater } = require("./water");
 const {
   updateCalories,
   createCalories,
   getAllCalories,
 } = require("./calories");
+
+const updateGoal = require("./goal");
 module.exports = {
   getAllUserInfo,
   getAllWeight,
@@ -43,4 +45,5 @@ module.exports = {
   updateCalories,
   createCalories,
   getAllCalories,
+  updateGoal,
 };
