@@ -3,6 +3,7 @@ const Joi = require("joi");
 
 const productSchema = Schema(
   {
+   
     breakfast: [
       {
         name: { type: String },
@@ -57,14 +58,24 @@ const addProduct = Joi.object({
   breakfast: Joi.array(),
   lunch: Joi.array(),
   snack: Joi.array(),
-  dinner: Joi.array(),
-  date:Joi.string(),
+  dinner: Joi.array()  
 });
 const createProduct = Joi.object({
+  products:Joi.array(),
+  type:Joi.string(),
   breakfast: Joi.object(),
   lunch: Joi.object(),
   snack: Joi.object(),
   dinner: Joi.object(),
+});
+const updateProduct = Joi.object({
+  // id:Joi.object(),
+  product:Joi.object(),
+  type:Joi.string(),
+  // breakfast: Joi.object(),
+  // lunch: Joi.object(),
+  // snack: Joi.object(),
+  // dinner: Joi.object(),
 });
 /*
 .Joi.array().items({
@@ -74,7 +85,7 @@ const createProduct = Joi.object({
     fat: Joi.number(),
     calories: Joi.number(),
   })*/
-const productSchemas = { addProduct, createProduct };
+const productSchemas = { addProduct, createProduct,updateProduct };
 
 const Products = model("product", productSchema);
 

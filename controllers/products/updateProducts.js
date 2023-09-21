@@ -1,23 +1,33 @@
-const { Products } = require("../../models");
+const { Products, Calories } = require("../../models");
 const { HttpError } = require("../../utils");
 
 const updateProducts = async (req, res, next) => {
-  
+  const { _id: owner } = req.user;
   const { id } = req.params;
 
   const body = req.body;
 
-  const newProducts = await Products.findByIdAndUpdate(id, {...body}, { new: true });
+  const type = body.type;
 
-  if (!newProducts) {
-    throw HttpError(404, "Not found");
-  }
+  const userProduct = await Products.findOne({ owner });
 
-  res.status(201).json({
+  const index = userProduct[type].findIndex(
+    (item) => item._id.toString() === id
+  );
+ if(index=== -1){
+
+ }
+  userProduct[type][index] = body.product;
+  userProduct.save();
+
+  const totalCalories = await Calories.findOne({owner})
+
+  res.json({
     status: "success",
-    code: 201,
+    code: 200,
     data: {
-      newProducts,
+      type,
+      product: { ...body.product, id },
     },
   });
 };
