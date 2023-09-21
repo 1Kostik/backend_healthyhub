@@ -19,16 +19,12 @@ const weightSchema = Schema(
   { versionKey: false, timestamps: true }
 );
 
-const addWeight = Joi.object({
-  weight: Joi.number().required(),
-  date: Joi.string().required(),
- 
-});
+
 const updateWeight = Joi.object({
-  weight: Joi.number().required(),
-  date: Joi.string().required(), 
+  weight: Joi.number().required()
 });
-const schemaWeight = { addWeight, updateWeight };
+
+const schemaWeight = { updateWeight };
 const Weight = model("weight", weightSchema);
 
 module.exports = { Weight, schemaWeight };
