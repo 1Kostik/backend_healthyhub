@@ -8,12 +8,13 @@ const swaggerDocument = require("./swagger.json");
 const logger = require("morgan");
 const cors = require("cors");
 const authRouter = require("./routes/api/auth");
-const userProducts= require("./routes/api/products")
-const userWeight= require("./routes/api/weight")
+const userProducts = require("./routes/api/products");
+const userWeight = require("./routes/api/weight");
 const userRouter = require("./routes/api/users");
 const waterRouter = require("./routes/api/water");
 const caloriesRouter = require("./routes/api/calories");
 const recommendedFood = require("./routes/api/recommendedFood");
+const updateGoal = require("./routes/api/goal");
 
 const app = express();
 app.use("/avatars", express.static(path.join(__dirname, "public", "avatars")));
@@ -31,6 +32,7 @@ app.use("/api/user", userWeight);
 app.use("/api/user", caloriesRouter);
 app.use("/api/water", waterRouter);
 app.use("/api/recommended-food", recommendedFood);
+app.use("/api/user", updateGoal);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found my page!" });
