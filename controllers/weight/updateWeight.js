@@ -1,4 +1,4 @@
-const { Weight } = require("../../models");
+const { Weight, User } = require("../../models");
 const { formattedDate } = require("../../utils");
 
 
@@ -33,6 +33,9 @@ const {_id:owner}=req.user;
         },
       });
     }
+    // меняем значение весы в колекции users
+    const newUser=await User.findByIdAndUpdate(owner, {weight:existingWeight.weight}, {new:true}).exec()
+    console.log(newUser)
   } catch (error) {
     console.error(error);
     res.status(500).json({
