@@ -4,6 +4,7 @@ const handleMongooseError = require("./handleMongooseError");
 const sendEmail = require("./sendEmail");
 const formattedDate = require("./formattedDate");
 const { sendNewPasswordByEmail } = require("./sendNewPasswordByEmail");
+const { calculateBMR } = require("./calculateBMR");
 module.exports = {
   sendEmail,
   HttpError,
@@ -11,4 +12,5 @@ module.exports = {
   formattedDate,
   handleMongooseError,
   sendNewPasswordByEmail,
+  calculateBMR,
 };
