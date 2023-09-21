@@ -25,8 +25,8 @@ const userSchema = new Schema(
     },
     goal: {
       type: String,
-      enum: ["Lose Fat", "Maintain", "Gain Muscle"],
-      default: "Lose Fat",
+      // enum: ["Lose Fat", "Maintain", "Gain Muscle"],
+      // default: "Lose Fat",
     },
     gender: {
       type: String,
@@ -76,7 +76,7 @@ const registerSchema = Joi.object({
   name: Joi.string().min(2).max(30).required(),
   email: Joi.string().pattern(emailRegexp).required(),
   password: Joi.string().min(6).max(16).required(),
-  goal: Joi.string().valid("Lose Fat", "Maintain", "Gain Muscle"),
+  goal: Joi.string(),
   gender: Joi.string().valid("male", "female"),
   age: Joi.number(),
   height: Joi.number(),
