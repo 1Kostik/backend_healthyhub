@@ -2,12 +2,12 @@ const { User } = require("../../models");
 
 const updateGoal = async (req, res, next) => {
   const { _id: id } = req.user; 
-  const { newGoal } = req.body; 
+  const { goal } = req.body; 
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
       id,
-      { goal: newGoal },
+      { goal: goal },
       { new: true }
     ).exec();
 
