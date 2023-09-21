@@ -19,6 +19,7 @@ const {
   updateCalories,
   createCalories,
   getAllCalories,
+  dailyGoalCalories,
 } = require("./calories");
 
 const updateGoal = require("./goal");
@@ -45,5 +46,6 @@ module.exports = {
   updateCalories,
   createCalories,
   getAllCalories,
+  dailyGoalCalories,
   updateGoal,
 };

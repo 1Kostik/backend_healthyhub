@@ -15,6 +15,7 @@ const waterRouter = require("./routes/api/water");
 const caloriesRouter = require("./routes/api/calories");
 const recommendedFood = require("./routes/api/recommendedFood");
 const updateGoal = require("./routes/api/goal");
+const dailyGoalCalories = require("./routes/api/dailyGoalCalories");
 
 const app = express();
 app.use("/avatars", express.static(path.join(__dirname, "public", "avatars")));
@@ -31,6 +32,7 @@ app.use("/api/user", userProducts);
 app.use("/api/user", userWeight);
 app.use("/api/user", caloriesRouter);
 app.use("/api/water", waterRouter);
+app.use("/api/user", dailyGoalCalories)
 app.use("/api/recommended-food", recommendedFood);
 app.use("/api/user", updateGoal);
 
