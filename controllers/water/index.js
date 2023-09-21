@@ -1,4 +1,4 @@
 const createWaterRecord = require("./createWaterRecord");
-const getWaterByOwner = require("./getWaterByOwner");
+const getWaterIntake = require("./getWaterIntake");
 const updateWater = require("./updateWater");
-module.exports = { createWaterRecord, getWaterByOwner, updateWater };
+module.exports = { createWaterRecord, getWaterIntake, updateWater };

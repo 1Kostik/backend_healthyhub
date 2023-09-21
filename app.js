@@ -31,7 +31,7 @@ app.use("/api/users", userRouter);
 app.use("/api/user", userProducts);
 app.use("/api/user", userWeight);
 app.use("/api/user", caloriesRouter);
-app.use("/api/water", waterRouter);
+app.use("/api/user", waterRouter);
 app.use("/api/user", dailyGoalCalories)
 app.use("/api/recommended-food", recommendedFood);
 app.use("/api/user", updateGoal);

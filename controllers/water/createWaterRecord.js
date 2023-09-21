@@ -1,18 +1,20 @@
 const { Water } = require("../../models/water");
 
 const createWaterRecord = async (req, res) => {
-  try {
-    const { water, owner } = req.body;
+    const { _id: owner } = req.user;
+    
+    const body = req.body;
+    
+    const newWater = await Water.create({ ...body, owner });
+    
+    res.status(201).json({
+        status: "success",
+        code: 201,
+        data: {
+        newWater,
+        },
+    });
 
-    const waterRecord = new Water({ water, owner });
-
-    const savedRecord = await waterRecord.save();
-
-    res.status(201).json(savedRecord);
-  } catch (error) {
-    console.error(error);
-    res.status(501).json({ error: "Server error" });
-  }
 };
 
 module.exports = createWaterRecord;
