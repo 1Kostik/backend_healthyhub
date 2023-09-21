@@ -11,7 +11,7 @@ const { ctrlWrapper } = require("../../utils");
 const router = express.Router();
 
 router.get(
-  "/",
+  "/food-intake",
   authenticate,
   validateBody(productSchemas.addProduct),
   ctrlWrapper(getAllProducts)
@@ -25,7 +25,7 @@ router.post(
 router.put(
   "/food-intake/:id",
   authenticate,
-  validateBody(productSchemas.addProduct),
+  validateBody(productSchemas.updateProduct),
   ctrlWrapper(updateProducts)
 );
 
