@@ -1,25 +1,31 @@
 const { User } = require("../../models");
 
 const updateGoal = async (req, res, next) => {
-  const { userId } = req.params; // Отримуємо ідентифікатор користувача
-  const { newGoal } = req.body; // Отримуємо нову ціль з тіла запиту
+  const { _id: id } = req.user; 
+  const { newGoal } = req.body; 
 
   try {
-    const user = await User.findById(userId); // Знаходимо користувача по id
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { goal: newGoal },
+      { new: true }
+    ).exec();
 
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
+    if (!updatedUser) {
+      return res.status(404).json({
+        status: "error",
+        code: 404,
+        message: "User not found",
+      });
     }
-
-    user.goal = newGoal; // Оновлюємо та зберігаємо ціль користувача
-    await user.save();
 
     res.status(200).json({
       status: "success",
       code: 200,
       data: {
-        goal: user.goal, // Повертаємо ціль користувача
+        goal: updatedUser.goal,
       },
+
     });
   } catch (error) {
     next(error);

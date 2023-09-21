@@ -32,7 +32,7 @@ app.use("/api/user", userWeight);
 app.use("/api/user", caloriesRouter);
 app.use("/api/water", waterRouter);
 app.use("/api/recommended-food", recommendedFood);
-app.use("/api/goal", updateGoal);
+app.use("/api/user", updateGoal);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found my page!" });
