@@ -4,7 +4,6 @@ const { HttpError } = require("../../utils");
 const { User } = require("../../models/user");
 
 async function uploadAvatar(req, res, next) {
-  console.log(req.file)
   try {
     await fs.rename(
       req.file.path,
@@ -18,11 +17,17 @@ async function uploadAvatar(req, res, next) {
     if (doc === null) {
       return res.status(404).send({ message: "User not found" });
     }
-    res.send(doc);
+
+    const avatarURL = `/avatars/${req.file.filename}`; 
+
+    res.status(200).json({
+      status: "success",
+      code: 200,
+      avatarURL: avatarURL,
+    });
   } catch (error) {
     next(HttpError(404));
   }
 }
-module.exports = 
-  uploadAvatar
-;
+
+module.exports = uploadAvatar;

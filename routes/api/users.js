@@ -1,10 +1,13 @@
 const path = require("path");
 const express = require("express");
-const {uploadAvatar,updateUserInfo,getAllUserInfo} = require("../../controllers/");
-const { authenticate,resize } = require("../../middlewares");
+const {
+  uploadAvatar,
+  updateUserInfo,
+  getAllUserInfo,
+} = require("../../controllers/");
+const { authenticate, resize } = require("../../middlewares");
 const multer = require("multer");
 const { ctrlWrapper } = require("../../utils");
-
 
 const router = express.Router();
 
@@ -14,31 +17,23 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const extname = path.extname(file.originalname);
-    const basename = path.basename(file.originalname,extname)
+    const basename = path.basename(file.originalname, extname);
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    const name = `${basename}-${uniqueSuffix}${extname}`
-    cb(null,name);
+    const name = `${basename}-${uniqueSuffix}${extname}`;
+    cb(null, name);
   },
 });
 
 const upload = multer({ storage });
 
-router.get(
-  "/:ownerId",
-  authenticate,
-  ctrlWrapper(getAllUserInfo)
-);
+router.get("/:ownerId", authenticate, ctrlWrapper(getAllUserInfo));
 router.patch(
   "/avatar",
   authenticate,
-  upload.single("avatar"),resize,  
+  upload.single("avatar"),
+  resize,
   ctrlWrapper(uploadAvatar)
 );
-router.patch(
-  "/update",
-  authenticate,
-  ctrlWrapper(updateUserInfo)
-);
-
+router.patch("/update", authenticate, ctrlWrapper(updateUserInfo));
 
 module.exports = router;

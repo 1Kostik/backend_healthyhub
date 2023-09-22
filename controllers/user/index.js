@@ -1,4 +1,4 @@
-const  uploadAvatar  = require("./user");
+const  uploadAvatar  = require("./uploadAvatar");
 const updateUserInfo = require("./updateUserInfo")
 const getAllUserInfo = require("./getAllUserInfo")
 module.exports = {
