@@ -28,7 +28,7 @@ const updateWater = Joi.object({
   date: Joi.string(),
 });
 const getWater = Joi.object({
-  value: Joi.number().required(),
+  value: Joi.number(),
   date: Joi.string(),
 });
 const schemaWater = { addWater, updateWater, getWater };
