@@ -30,7 +30,7 @@ router.get("/:ownerId", authenticate, ctrlWrapper(getAllUserInfo));
 router.patch(
   "/avatar",
   authenticate,
-  upload.single("avatar"),
+  upload.single("avatarURL"),
   resize,
   ctrlWrapper(uploadAvatar)
 );
