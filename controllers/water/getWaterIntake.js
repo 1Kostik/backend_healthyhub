@@ -6,12 +6,16 @@ const getWaterIntake = async (req, res, next) => {
   const currentDate = formattedDate();
   try {
     const existingWater = await Water.findOne({ owner, date: currentDate });
-
     if (!existingWater) {
-      res.status(404).json({
-        status: "error",
-        code: 404,
-        message: "Water intake not found for the current date",
+      const user= await Water.create({owner, date:currentDate, value:0})
+      console.log(user)
+      res.status(201).json({
+        status: "success",
+        code: 201,
+        data: {
+          date: currentDate,
+          value: 0,
+        },
       });
       return;
     }
@@ -21,7 +25,7 @@ const getWaterIntake = async (req, res, next) => {
       code: 200,
       data: {
         date: currentDate,
-        value: existingWater.water,
+        value: existingWater.value,
       },
     });
   } catch (error) {

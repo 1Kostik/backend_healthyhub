@@ -3,7 +3,7 @@ const Joi = require("joi");
 
 const waterSchema = Schema(
   {
-    water: {
+    value: {
       type: Number,
       default: 0,
     },
@@ -20,14 +20,15 @@ const waterSchema = Schema(
 );
 
 const addWater = Joi.object({
-  water: Joi.number().required(),
+  value: Joi.number().required(),
   date: Joi.string(),
 });
 const updateWater = Joi.object({
-  water: Joi.number().required(),
+  value: Joi.number().required(),
   date: Joi.string(),
 });
 const getWater = Joi.object({
+  value: Joi.number().required(),
   date: Joi.string(),
 });
 const schemaWater = { addWater, updateWater, getWater };
