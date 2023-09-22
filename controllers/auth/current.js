@@ -13,8 +13,7 @@ const current = async (req, res) => {
         weight: user.weight,
         activity: user.activity,
         avatarURL: user.avatarURL,
-      },
-      token:user.token
+      }
     });
 };
 
