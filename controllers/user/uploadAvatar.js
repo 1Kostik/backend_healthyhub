@@ -38,7 +38,9 @@ async function uploadAvatar(req, res, next) {
     await User.findByIdAndUpdate(id, {avatarURL, idCloudAvatar}, { new: true } ).exec() 
     await fs.unlink(req.file.path)
     res.json({
-        avatarURL
+      status: "success",
+      code: 200,
+      avatarURL
     })
 
 
