@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { User } = require("../../models");
-const { HttpError } = require("../../utils");
+const { User, Weight } = require("../../models");
+const { HttpError, formattedDate } = require("../../utils");
 
 require("dotenv").config();
 
@@ -29,6 +29,16 @@ const login = async (req, res) => {
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "3h" });
 
   await User.findByIdAndUpdate(user._id, { token });
+
+  let currendWeightDate;
+  const currentDate=formattedDate();
+ const userWeightDate=await Weight.findOne({owner:user._id, date:currentDate});
+ if(!userWeightDate){
+  currendWeightDate=null;
+ }else{
+  currendWeightDate=currentDate;
+ }
+
   res.json({
     status: "success",
     code: 200,
@@ -44,6 +54,7 @@ const login = async (req, res) => {
         activity: user.activity,
         avatarURL: user.avatarURL,
      },
+     dateLastWeight:currendWeightDate
   });
 };
 module.exports = login;

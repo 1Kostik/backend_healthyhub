@@ -19,6 +19,8 @@ const {_id:owner}=req.user;
           weight: newWeight.weight,
         },
       });
+await User.findByIdAndUpdate(owner, {weight:newWeight.weight}, {new:true}).exec()
+
     } else {
       // Если вес на текущую дату найден, обновляем его
       existingWeight.weight = body.weight;
@@ -34,8 +36,7 @@ const {_id:owner}=req.user;
       });
     }
     // меняем значение весы в колекции users
-    const newUser=await User.findByIdAndUpdate(owner, {weight:existingWeight.weight}, {new:true}).exec()
-    console.log(newUser)
+  await User.findByIdAndUpdate(owner, {weight:existingWeight.weight}, {new:true}).exec()
   } catch (error) {
     console.error(error);
     res.status(500).json({
