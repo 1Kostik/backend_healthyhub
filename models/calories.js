@@ -21,7 +21,7 @@ const caloriesSchema = Schema(
 
 const addCaloriesShema = Joi.object({
   calories: Joi.number().required(),
-  date: Joi.string().required(),
+  date: Joi.string(),
 });
 
 const Calories = model("calories", caloriesSchema);
