@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "2.1.4",
+    "version": "2.1.5",
     "title": "HealthHub API",
     "description": "Тут може бути Ваша реклама 🙂"
   },
@@ -562,38 +562,241 @@
     "/api/user/food-intake": {
       "post": {
         "tags": ["User"],
-        "summary": "Add food intake for a user",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "userId",
-            "description": "User's id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "summary": "Add food intake for a meal type",
         "requestBody": {
           "description": "Food intake object",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FoodIntakeRequest"
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Type of meal (e.g., 'breakfast', 'snack', 'dinner', 'lunch')"
+                  },
+                  "products": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "description": "Name of the food product"
+                        },
+                        "carbonohidrates": {
+                          "type": "number",
+                          "description": "Carbohydrate content"
+                        },
+                        "protein": {
+                          "type": "number",
+                          "description": "Protein content"
+                        },
+                        "fat": {
+                          "type": "number",
+                          "description": "Fat content"
+                        },
+                        "calories": {
+                          "type": "number",
+                          "description": "Calories content"
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Food intake added successfully"
-          },
-          "400": {
-            "description": "Bad request (invalid request body)"
-          },
-          "401": {
-            "description": "Unauthorized (invalid token)"
+            "description": "Successful creation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 201
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "carbonohidrates": {
+                                "type": "number"
+                              },
+                              "protein": {
+                                "type": "number"
+                              },
+                              "fat": {
+                                "type": "number"
+                              },
+                              "calories": {
+                                "type": "number"
+                              },
+                              "id": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "totalCalories": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "summary": "Get user's food intake",
+        "responses": {
+          "200": {
+            "description": "Successful retrieval",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "breakfast": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string",
+                                "example": "english breakfast"
+                              },
+                              "carbonohidrates": {
+                                "type": "number",
+                                "example": 22
+                              },
+                              "protein": {
+                                "type": "number",
+                                "example": 22
+                              },
+                              "fat": {
+                                "type": "number",
+                                "example": 22
+                              },
+                              "calories": {
+                                "type": "number",
+                                "example": 59
+                              }
+                            }
+                          }
+                        },
+                        "snack": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "carbonohidrates": {
+                                "type": "number"
+                              },
+                              "protein": {
+                                "type": "number"
+                              },
+                              "fat": {
+                                "type": "number"
+                              },
+                              "calories": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        },
+                        "dinner": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "carbonohidrates": {
+                                "type": "number"
+                              },
+                              "protein": {
+                                "type": "number"
+                              },
+                              "fat": {
+                                "type": "number"
+                              },
+                              "calories": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        },
+                        "lunch": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "carbonohidrates": {
+                                "type": "number"
+                              },
+                              "protein": {
+                                "type": "number"
+                              },
+                              "fat": {
+                                "type": "number"
+                              },
+                              "calories": {
+                                "type": "number"
+                              }
+                            }
+                          }
+                        },
+                        "totalCalories": {
+                          "type": "number",
+                          "example": 120
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -601,12 +804,12 @@
     "/api/user/food-intake/{id}": {
       "put": {
         "tags": ["User"],
-        "summary": "Update food intake by ID",
+        "summary": "Update food intake for a specific product",
         "parameters": [
           {
-            "in": "path",
             "name": "id",
-            "description": "ID of the food intake record",
+            "in": "path",
+            "description": "ID of the food product to update",
             "required": true,
             "schema": {
               "type": "string"
@@ -614,32 +817,106 @@
           }
         ],
         "requestBody": {
-          "description": "Updated food intake information",
+          "description": "Food product object",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FoodIntakeRequest"
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Type of meal (e.g., 'breakfast', 'snack', 'dinner', 'lunch')"
+                  },
+                  "product": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the food product"
+                      },
+                      "carbonohidrates": {
+                        "type": "number",
+                        "description": "Carbohydrate content"
+                      },
+                      "protein": {
+                        "type": "number",
+                        "description": "Protein content"
+                      },
+                      "fat": {
+                        "type": "number",
+                        "description": "Fat content"
+                      },
+                      "calories": {
+                        "type": "number",
+                        "description": "Calories content"
+                      }
+                    }
+                  }
+                }
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Food intake updated successfully"
-          },
-          "400": {
-            "description": "Bad request (invalid request body or ID)"
-          },
-          "401": {
-            "description": "Unauthorized (invalid token)"
-          },
-          "404": {
-            "description": "Food intake record not found"
+            "description": "Successful update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "product": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "carbonohidrates": {
+                              "type": "number"
+                            },
+                            "protein": {
+                              "type": "number"
+                            },
+                            "fat": {
+                              "type": "number"
+                            },
+                            "calories": {
+                              "type": "number"
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "totalCalories": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
     },
+
     "/api/user/water-intake": {
       "post": {
         "tags": ["User"],
@@ -1120,9 +1397,67 @@
       },
       "RegistrationResponse": {
         "type": "object",
-        "required": ["status", "code", "token", "user"],
-        "properties": {}
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the registration request",
+            "example": "success"
+          },
+          "code": {
+            "type": "number",
+            "description": "HTTP status code",
+            "example": 201
+          },
+          "token": {
+            "type": "string",
+            "description": "JWT token for authentication",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          },
+          "user": {
+            "type": "object",
+            "description": "User information",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "John Doe"
+              },
+              "goal": {
+                "type": "string",
+                "description": "User's goal",
+                "enum": ["Lose Fat", "Gain Muscle", "Maintain Weight"]
+              },
+              "age": {
+                "type": "number",
+                "description": "User's age"
+              },
+              "gender": {
+                "type": "string",
+                "description": "User's gender",
+                "enum": ["male", "female"]
+              },
+              "weight": {
+                "type": "number",
+                "description": "User's weight"
+              },
+              "height": {
+                "type": "number",
+                "description": "User's height"
+              },
+              "activity": {
+                "type": "number",
+                "description": "User's activity level"
+              }
+            }
+          }
+        }
       },
+
       "SigninRequest": {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
