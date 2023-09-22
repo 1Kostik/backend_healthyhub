@@ -24,7 +24,6 @@ const updateWater = async (req, res, next) => {
     } else {
       existingWater.water += body.water;
       await existingWater.save();
-
       res.status(200).json({
         status: "success",
         code: 200,
