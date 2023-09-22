@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "2.1.2",
+    "version": "2.1.4",
     "title": "HealthHub API",
     "description": "Тут може бути Ваша реклама 🙂"
   },
@@ -804,6 +804,210 @@
                         "goal": {
                           "type": "string",
                           "example": "lose fat"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/weight": {
+      "put": {
+        "tags": ["User"],
+        "summary": "Update user's weight",
+        "requestBody": {
+          "description": "User's weight object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "weight": {
+                    "type": "number",
+                    "description": "User's new weight",
+                    "example": 67
+                  }
+                },
+                "required": ["weight"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "example": "22.10.2023"
+                        },
+                        "weight": {
+                          "type": "number",
+                          "example": 67
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/statistics": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get user's statistics",
+        "responses": {
+          "200": {
+            "description": "Successful retrieval",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "water": {
+                          "type": "object",
+                          "properties": {
+                            "lastMonth": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "date": {
+                                    "type": "string",
+                                    "example": "2023-09-01"
+                                  },
+                                  "value": {
+                                    "type": "number",
+                                    "example": 1500
+                                  }
+                                }
+                              }
+                            },
+                            "lastYear": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "date": {
+                                    "type": "string",
+                                    "example": "2022-09-01"
+                                  },
+                                  "value": {
+                                    "type": "number",
+                                    "example": 1600
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "weight": {
+                          "type": "object",
+                          "properties": {
+                            "lastMonth": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "date": {
+                                    "type": "string",
+                                    "example": "2023-09-01"
+                                  },
+                                  "value": {
+                                    "type": "number",
+                                    "example": 70
+                                  }
+                                }
+                              }
+                            },
+                            "lastYear": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "date": {
+                                    "type": "string",
+                                    "example": "2022-09-01"
+                                  },
+                                  "value": {
+                                    "type": "number",
+                                    "example": 75
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "calories": {
+                          "type": "object",
+                          "properties": {
+                            "lastMonth": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "date": {
+                                    "type": "string",
+                                    "example": "2023-09-01"
+                                  },
+                                  "value": {
+                                    "type": "number",
+                                    "example": 2000
+                                  }
+                                }
+                              }
+                            },
+                            "lastYear": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "date": {
+                                    "type": "string",
+                                    "example": "2022-09-01"
+                                  },
+                                  "value": {
+                                    "type": "number",
+                                    "example": 2100
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     }
