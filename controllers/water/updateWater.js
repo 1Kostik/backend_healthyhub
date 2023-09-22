@@ -18,18 +18,18 @@ const updateWater = async (req, res, next) => {
         code: 201,
         data: {
           date: currentDate,
-          water: newWater.water,
+          value: newWater.value,
         },
       });
     } else {
-      existingWater.water += body.water;
+      existingWater.value += body.value;
       await existingWater.save();
       res.status(200).json({
         status: "success",
         code: 200,
         data: {
           date: currentDate,
-          value: existingWater.water,
+          value: existingWater.value,
         },
       });
     }
