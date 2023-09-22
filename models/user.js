@@ -65,6 +65,10 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
+    idCloudAvatar:{
+      type:String,
+      default: null
+    }
   },
 
   { versionKey: false, timestamps: true }
