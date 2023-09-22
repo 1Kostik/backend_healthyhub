@@ -1,17 +1,18 @@
 const { Calories } = require("../../models");
+const { formattedDate } = require("../../utils");
 
 const createCalories = async (req, res, next) => {
 
 
   const { _id: owner } = req.user;
 
-  console.log(owner);
+  const currentDate = formattedDate();
 
   const body = req.body;
 
-  console.log(body);
+  
 
-  const newCalories = await Calories.create({ ...body,owner});
+  const newCalories = await Calories.create({ ...body,owner, date:currentDate});
 
   res.status(201).json({
     status: "success",
