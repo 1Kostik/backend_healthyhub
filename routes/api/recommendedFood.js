@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
     const data = fs.readFileSync("RecommendedFood.json", "utf8");
     const recommendedFood = JSON.parse(data);
 
-    res.json(recommendedFood);
+    res.json({ status: "success", code: 200, data: recommendedFood });
   } catch (error) {
     console.error("Error reading of JSON:", error);
     res.status(500).json({ error: "Internal server" });
