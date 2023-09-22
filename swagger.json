@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "2.1.1",
+    "version": "2.1.2",
     "title": "HealthHub API",
     "description": "Тут може бути Ваша реклама 🙂"
   },
@@ -17,6 +17,10 @@
     {
       "name": "Auth",
       "description": "Authorization endpoints"
+    },
+    {
+      "name": "User",
+      "description": "User endpoints"
     },
     {
       "name": "Users",
@@ -62,23 +66,125 @@
           }
         ],
         "requestBody": {
-          "description": "Registration's object",
+          "description": "Registration object",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegistrationRequest"
-              }
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "User's email",
+                    "example": "johndoe@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "User's password",
+                    "example": "password123"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "User's name",
+                    "example": "John Doe"
+                  },
+                  "goal": {
+                    "type": "string",
+                    "description": "User's goal",
+                    "example": "Lose Fat",
+                    "enum": ["Lose Fat", "Gain Muscle", "Maintain Weight"]
+                  },
+                  "age": {
+                    "type": "number",
+                    "description": "User's age"
+                  },
+                  "weight": {
+                    "type": "number",
+                    "description": "User's weight"
+                  },
+                  "height": {
+                    "type": "number",
+                    "description": "User's height"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "enum": ["male", "female"]
+                  },
+                  "activity": {
+                    "type": "number",
+                    "enum": [1.2, 1.375, 1.55, 1.725, 1.9]
+                  }
+                }
+              },
+              "required": ["email", "password", "name", "goal", "age"]
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Successful operation",
+            "description": "Successful registration",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RegistrationResponse"
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 201
+                    },
+                    "token": {
+                      "type": "string",
+                      "description": "Authentication token for the registered user",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string",
+                          "format": "email",
+                          "example": "johndoe@example.com"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "John Doe"
+                        },
+                        "goal": {
+                          "type": "string",
+                          "example": "Maintain"
+                        },
+                        "gender": {
+                          "type": "string",
+                          "example": "male"
+                        },
+                        "age": {
+                          "type": "number",
+                          "example": 30
+                        },
+                        "height": {
+                          "type": "number",
+                          "example": 175
+                        },
+                        "weight": {
+                          "type": "number",
+                          "example": 75
+                        },
+                        "activity": {
+                          "type": "number",
+                          "example": "1.5"
+                        },
+                        "avatarURL": {
+                          "type": "string",
+                          "example": "https://example.com/avatar.jpg"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -87,7 +193,7 @@
             "description": "Bad request (invalid request body)"
           },
           "409": {
-            "description": "Provided email already exists"
+            "description": "Email already in use"
           }
         }
       }
@@ -329,15 +435,6 @@
         "summary": "Get current user",
         "parameters": [
           {
-            "in": "path",
-            "name": "userId",
-            "description": "User's id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "in": "header",
             "name": "Authorization",
             "description": "Bearer token for authentication",
@@ -375,15 +472,6 @@
         "summary": "Update user's information",
         "parameters": [
           {
-            "in": "path",
-            "name": "userId",
-            "description": "User's id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "in": "header",
             "name": "Authorization",
             "description": "Bearer token for authentication",
@@ -393,11 +481,7 @@
             }
           }
         ],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+
         "requestBody": {
           "description": "Updated user's information",
           "required": true,
@@ -448,7 +532,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "avatar": {
+                  "avatarURL": {
                     "type": "string",
                     "format": "binary",
                     "description": "Avatar image file"
@@ -475,46 +559,9 @@
       }
     },
 
-    "/api/recommended-food": {
-      "get": {
-        "tags": ["Recommended Food"],
-        "summary": "Get food recommendations",
-        "description": "Retrieve a list of recommended food items.",
-        "responses": {
-          "200": {
-            "description": "Successful request. Returns a list of recommended food items.",
-            "content": {
-              "application/json": {
-                "example": {
-                  "name": "Apples",
-                  "amount": "100 g",
-                  "img": "https://res.cloudinary.com/dec1shvoo/image/upload/v1692479041/Your%20health/pngfind.com-apple-png-1037796_udjai9.png",
-                  "calories": 52,
-                  "nutrition": {
-                    "carbohydrates": 14,
-                    "protein": 0.3,
-                    "fat": 0.2
-                  }
-                },
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Food"
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server error. Unable to retrieve food recommendations."
-          }
-        }
-      }
-    },
-
     "/api/user/food-intake": {
       "post": {
-        "tags": ["Users"],
+        "tags": ["User"],
         "summary": "Add food intake for a user",
         "parameters": [
           {
@@ -553,7 +600,7 @@
     },
     "/api/user/food-intake/{id}": {
       "put": {
-        "tags": ["Users"],
+        "tags": ["User"],
         "summary": "Update food intake by ID",
         "parameters": [
           {
@@ -589,6 +636,218 @@
           },
           "404": {
             "description": "Food intake record not found"
+          }
+        }
+      }
+    },
+    "/api/user/water-intake": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Add Water intake for a user",
+        "security": {
+          "bearerAuth": []
+        },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Water intake object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WaterIntakeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Water intake added successfully"
+          },
+          "400": {
+            "description": "Bad request (invalid request body)"
+          },
+          "401": {
+            "description": "Unauthorized (invalid token)"
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "summary": "Get user's water intake",
+        "responses": {
+          "200": {
+            "description": "Successful retrieval",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "example": "22.10.2023"
+                        },
+                        "value": {
+                          "type": "number",
+                          "example": 300
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/daily-goal-calories": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get user's daily goal calories",
+        "responses": {
+          "200": {
+            "description": "Successful retrieval",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number",
+                          "example": 1700
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/user/goal": {
+      "put": {
+        "tags": ["User"],
+        "summary": "Update user's goal",
+        "requestBody": {
+          "description": "User's goal object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "goal": {
+                    "type": "string",
+                    "description": "User's new goal",
+                    "example": "lose fat"
+                  }
+                },
+                "required": ["goal"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "code": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "goal": {
+                          "type": "string",
+                          "example": "lose fat"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/recommended-food": {
+      "get": {
+        "tags": ["Recommended Food"],
+        "summary": "Get food recommendations",
+        "description": "Retrieve a list of recommended food items.",
+        "responses": {
+          "200": {
+            "description": "Successful request. Returns a list of recommended food items.",
+            "content": {
+              "application/json": {
+                "example": {
+                  "name": "Apples",
+                  "amount": "100 g",
+                  "img": "https://res.cloudinary.com/dec1shvoo/image/upload/v1692479041/Your%20health/pngfind.com-apple-png-1037796_udjai9.png",
+                  "calories": 52,
+                  "nutrition": {
+                    "carbohydrates": 14,
+                    "protein": 0.3,
+                    "fat": 0.2
+                  }
+                },
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Food"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error. Unable to retrieve food recommendations."
           }
         }
       }
@@ -633,7 +892,7 @@
             "enum": ["Lose Fat", "Gain Muscle", "Maintain Weight"]
           },
           "age": {
-            "type": "integer",
+            "type": "number",
             "description": "User's age"
           },
           "gender": {
@@ -656,20 +915,9 @@
         }
       },
       "RegistrationResponse": {
-        "$schema": "http://json-schema.org/draft-07/schema#",
         "type": "object",
-        "properties": {
-          "email": {
-            "type": "string",
-            "format": "email"
-          },
-          "name": {
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 30
-          }
-        },
-        "required": ["email", "name"]
+        "required": ["status", "code", "token", "user"],
+        "properties": {}
       },
       "SigninRequest": {
         "$schema": "http://json-schema.org/draft-07/schema#",
@@ -745,6 +993,17 @@
           }
         },
         "required": ["status", "code", "token", "user"]
+      },
+
+      "WaterIntakeRequest": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number",
+            "description": "Value of water"
+          }
+        },
+        "description": "Data for updating information about water intake."
       },
 
       "Food": {
