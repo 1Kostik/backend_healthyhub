@@ -1,5 +1,17 @@
+const { Weight } = require("../../models");
+const { formattedDate } = require("../../utils");
+
 const current = async (req, res) => {
   const user=req.user;
+
+  let currendWeightDate;
+  const currentDate=formattedDate();
+ const userWeightDate=await Weight.findOne({owner:user._id, date:currentDate});
+ if(!userWeightDate){
+  currendWeightDate=null;
+ }else{
+  currendWeightDate=currentDate;
+ }
 
     res.status(200).json({
       status: "success",
@@ -13,7 +25,8 @@ const current = async (req, res) => {
         weight: user.weight,
         activity: user.activity,
         avatarURL: user.avatarURL,
-      }
+      },
+      dateLastWeight:currendWeightDate
     });
 };
 
