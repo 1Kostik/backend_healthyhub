@@ -11,14 +11,14 @@ async function uploadAvatar(req, res, next) {
     );
     const doc = await User.findByIdAndUpdate(
       req.user.id,
-      { avatar: req.file.filename },
+      { avatarURL: req.file.filename },
       { new: true }
     ).exec();
     if (doc === null) {
       return res.status(404).send({ message: "User not found" });
     }
 
-    const avatarURL = `/avatars/${req.file.filename}`; 
+    const avatarURL = `/avatars/${req.file.filename}`;
 
     res.status(200).json({
       status: "success",
