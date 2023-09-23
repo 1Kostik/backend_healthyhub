@@ -30,7 +30,7 @@ router.patch(
   "/avatar",
   authenticate,
   upload.single("avatarURL"),
-  resize,
+  // resize,
   ctrlWrapper(uploadAvatar)
 );
 router.patch("/update", authenticate, ctrlWrapper(updateUserInfo));
