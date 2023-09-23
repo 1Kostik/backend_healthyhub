@@ -17,6 +17,7 @@ const { createWaterRecord, getWaterIntake, updateWater } = require("./water");
 const { getAllCalories, dailyGoalCalories } = require("./calories");
 
 const updateGoal = require("./goal");
+const getUserStatistics = require("./statistics");
 module.exports = {
   login,
   verify,
@@ -38,4 +39,5 @@ module.exports = {
   resendVerifyEmail,
   createWaterRecord,
   dailyGoalCalories,
+  getUserStatistics,
 };

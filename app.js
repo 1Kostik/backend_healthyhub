@@ -16,6 +16,7 @@ const caloriesRouter = require("./routes/api/calories");
 const recommendedFood = require("./routes/api/recommendedFood");
 const updateGoal = require("./routes/api/goal");
 const dailyGoalCalories = require("./routes/api/dailyGoalCalories");
+const getUserStatistics = require("./routes/api/statistics");
 
 const app = express();
 app.use("/avatars", express.static(path.join(__dirname, "public", "avatars")));
@@ -35,6 +36,7 @@ app.use("/api/user", waterRouter);
 app.use("/api/user", dailyGoalCalories);
 app.use("/api/recommended-food", recommendedFood);
 app.use("/api/user", updateGoal);
+app.use("/api/user", getUserStatistics);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found my page!" });
