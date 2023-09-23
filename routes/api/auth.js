@@ -1,13 +1,11 @@
 const express = require("express");
 const {
-  resendVerifyEmail,
-  verify,
-  register,
   login,
   logout,
+  verify,
   current,
-  updateSubscriptionUser,
-  updateUserProfile,
+  register,
+  resendVerifyEmail,
 } = require("../../controllers");
 const { resetPassword } = require("../../controllers/auth");
 const { checkEmail } = require("../../controllers/auth");

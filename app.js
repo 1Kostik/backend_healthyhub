@@ -32,7 +32,7 @@ app.use("/api/user", userProducts);
 app.use("/api/user", userWeight);
 app.use("/api/user", caloriesRouter);
 app.use("/api/user", waterRouter);
-app.use("/api/user", dailyGoalCalories)
+app.use("/api/user", dailyGoalCalories);
 app.use("/api/recommended-food", recommendedFood);
 app.use("/api/user", updateGoal);
 
@@ -46,6 +46,3 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
-
-// Hello World !!!
-// POST /api/user/food-intake

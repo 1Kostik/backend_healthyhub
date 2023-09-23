@@ -1,10 +1,9 @@
 const {
-  register,
   login,
-  updateSubscriptionUser,
   logout,
-  current,
   verify,
+  current,
+  register,
   resendVerifyEmail,
 } = require("./auth");
 const {
@@ -12,36 +11,31 @@ const {
   createProducts,
   getAllProducts,
 } = require("./products");
-const { uploadAvatar, updateUserInfo, getAllUserInfo } = require("./user");
+const { uploadAvatar, updateUserInfo } = require("./user");
 const { updateWeight, createWeight, getAllWeight } = require("./weight");
 const { createWaterRecord, getWaterIntake, updateWater } = require("./water");
-const {
-  getAllCalories,
-  dailyGoalCalories,
-} = require("./calories");
+const { getAllCalories, dailyGoalCalories } = require("./calories");
 
 const updateGoal = require("./goal");
 module.exports = {
-  getAllUserInfo,
+  login,
+  verify,
+  logout,
+  current,
+  register,
+  updateGoal,
+  updateWater,
+  updateWeight,
   getAllWeight,
   createWeight,
-  createProducts,
-  updateWeight,
-  updateProducts,
-  verify,
-  resendVerifyEmail,
   uploadAvatar,
-  current,
-  logout,
-  updateSubscriptionUser,
-  register,
-  login,
-  createWaterRecord,
+  createProducts,
+  updateProducts,
   getWaterIntake,
-  updateWater,
   getAllProducts,
   updateUserInfo,
   getAllCalories,
+  resendVerifyEmail,
+  createWaterRecord,
   dailyGoalCalories,
-  updateGoal,
 };
