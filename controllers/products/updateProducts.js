@@ -1,6 +1,5 @@
 const { Products, Calories } = require("../../models");
 const { HttpError } = require("../../utils");
-const { sumCaloriesToday } = require("../../utils/calculateCalories");
 
 const updateProducts = async (req, res, next) => {
   const { _id: owner } = req.user;
@@ -24,6 +23,7 @@ const updateProducts = async (req, res, next) => {
     (item) => item._id.toString() === id
   );
   if (index === -1) {
+    next(HttpError(404, `Product with id=${id} not found`));
   }
   userProduct[type][index] = body.product;
   userProduct.save();
