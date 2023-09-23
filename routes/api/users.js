@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.get("/:ownerId", authenticate, ctrlWrapper(getAllUserInfo));
+
 router.patch(
   "/avatar",
   authenticate,
