@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "2.1.5",
+    "version": "2.2.4",
     "title": "HealthHub API",
     "description": "Victory is coming very soon 🙂"
   },
@@ -436,6 +436,15 @@
         "parameters": [
           {
             "in": "header",
+            "name": "id",
+            "description": "User's id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
             "name": "Authorization",
             "description": "Bearer token for authentication",
             "required": true,
@@ -481,6 +490,11 @@
             }
           }
         ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
 
         "requestBody": {
           "description": "Updated user's information",
@@ -524,6 +538,11 @@
             }
           }
         ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "description": "Avatar image file",
           "required": true,
@@ -543,7 +562,7 @@
           }
         },
         "responses": {
-          "204": {
+          "200": {
             "description": "Avatar uploaded successfully"
           },
           "400": {
@@ -563,6 +582,22 @@
       "post": {
         "tags": ["User"],
         "summary": "Add food intake for a meal type",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "description": "Food intake object",
           "required": true,
@@ -671,6 +706,31 @@
       "get": {
         "tags": ["User"],
         "summary": "Get user's food intake",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Date of food intake",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful retrieval",
@@ -814,6 +874,20 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -921,9 +995,6 @@
       "post": {
         "tags": ["User"],
         "summary": "Add Water intake for a user",
-        "security": {
-          "bearerAuth": []
-        },
         "parameters": [
           {
             "in": "header",
@@ -933,6 +1004,11 @@
             "schema": {
               "type": "string"
             }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -961,6 +1037,22 @@
       "get": {
         "tags": ["User"],
         "summary": "Get user's water intake",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful retrieval",
@@ -1002,6 +1094,22 @@
       "get": {
         "tags": ["User"],
         "summary": "Get user's daily goal calories",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful retrieval",
@@ -1040,6 +1148,22 @@
       "put": {
         "tags": ["User"],
         "summary": "Update user's goal",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "description": "User's goal object",
           "required": true,
@@ -1096,6 +1220,22 @@
       "put": {
         "tags": ["User"],
         "summary": "Update user's weight",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "description": "User's weight object",
           "required": true,
@@ -1156,6 +1296,22 @@
       "get": {
         "tags": ["User"],
         "summary": "Get user's statistics",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful retrieval",
