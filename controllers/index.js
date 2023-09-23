@@ -23,6 +23,7 @@ const {
 } = require("./calories");
 
 const updateGoal = require("./goal");
+const getUserStatistics = require("./statistics");
 module.exports = {
   getAllUserInfo,
   getAllWeight,
@@ -48,4 +49,5 @@ module.exports = {
   getAllCalories,
   dailyGoalCalories,
   updateGoal,
+  getUserStatistics,
 };
