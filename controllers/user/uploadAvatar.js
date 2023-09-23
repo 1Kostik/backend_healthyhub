@@ -15,7 +15,7 @@ cloudinary.config({
 
 const uploadCloud=(pathFile)=>{
   return new Promise((resolve, reject)=>{cloudinary.uploader.upload(pathFile, {folder:'Avatars',
-transformation:{width:250, crop: 'fit', angle: 0,}}, 
+transformation:{width:250, crop: 'fit', angle: 0, auto: true}}, 
   (error, result)=>{ 
       if(error){reject(error)}
       if(result){resolve(result)}
