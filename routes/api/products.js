@@ -12,8 +12,7 @@ const router = express.Router();
 
 router.get(
   "/food-intake",
-  authenticate,
-  // validateBody(productSchemas.addProduct),
+  authenticate,  
   ctrlWrapper(getAllProducts)
 );
 router.post(

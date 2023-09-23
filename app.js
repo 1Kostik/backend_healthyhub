@@ -48,6 +48,3 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
-
-// Hello World !!!
-// POST /api/user/food-intake

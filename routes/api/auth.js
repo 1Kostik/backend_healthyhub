@@ -1,13 +1,11 @@
 const express = require("express");
 const {
-  resendVerifyEmail,
-  verify,
-  register,
   login,
   logout,
+  verify,
   current,
-  updateSubscriptionUser,
-  updateUserProfile,
+  register,
+  resendVerifyEmail,
 } = require("../../controllers");
 const { resetPassword } = require("../../controllers/auth");
 const { checkEmail } = require("../../controllers/auth");
@@ -38,10 +36,5 @@ router.post(
 router.post("/forgot-password", ctrlWrapper(resetPassword));
 router.post("/logout", authenticate, ctrlWrapper(logout));
 router.get("/current", authenticate, ctrlWrapper(current));
-router.patch(
-  "/",
-  authenticate,
-  validateBody(userSchemas.updateSubscriptionSchema),
-  ctrlWrapper(updateSubscriptionUser)
-);
+
 module.exports = router;

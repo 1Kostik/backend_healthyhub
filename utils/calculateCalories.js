@@ -1,4 +1,4 @@
-const sumCaloriesToday = (userProduct) => {
+const sumCalories = (userProduct) => {
   const breakfast = userProduct["breakfast"].map((el) => el.calories);
   const snack = userProduct["snack"].map((el) => el.calories);
   const lunch = userProduct["lunch"].map((el) => el.calories);
@@ -9,4 +9,4 @@ const sumCaloriesToday = (userProduct) => {
   }, 0);
   return totalCaloriesToday;
 };
-module.exports = { sumCaloriesToday };
+module.exports = { sumCalories };
