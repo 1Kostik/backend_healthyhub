@@ -3,8 +3,7 @@ const express = require("express");
 const {
   uploadAvatar,
   updateUserInfo,
-  getAllUserInfo,
-} = require("../../controllers/");
+ } = require("../../controllers/");
 const { authenticate, resize } = require("../../middlewares");
 const multer = require("multer");
 const { ctrlWrapper } = require("../../utils");

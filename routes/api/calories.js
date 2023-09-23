@@ -3,8 +3,7 @@ const {
   
   getAllCalories,
 } = require("../../controllers");
-const { validateBody, authenticate } = require("../../middlewares");
-const { addCaloriesShema } = require("../../models");
+const { authenticate } = require("../../middlewares");
 const { ctrlWrapper } = require("../../utils");
 
 const router = express.Router();
