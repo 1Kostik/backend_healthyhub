@@ -16,8 +16,6 @@ const { uploadAvatar, updateUserInfo, getAllUserInfo } = require("./user");
 const { updateWeight, createWeight, getAllWeight } = require("./weight");
 const { createWaterRecord, getWaterIntake, updateWater } = require("./water");
 const {
-  updateCalories,
-  createCalories,
   getAllCalories,
   dailyGoalCalories,
 } = require("./calories");
@@ -43,8 +41,6 @@ module.exports = {
   updateWater,
   getAllProducts,
   updateUserInfo,
-  updateCalories,
-  createCalories,
   getAllCalories,
   dailyGoalCalories,
   updateGoal,
