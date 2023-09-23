@@ -1,49 +1,48 @@
 ## Node.js project
-Registration :
-User :
-1 name
-2 email
-3 password
 
-you goal :
+HealthyHub Backend
+HealthyHub - це веб-додаток, який допомагає користувачам вести здоровий спосіб життя.
 
-1 Lose Fat
-2 Maintain
-3 Gain Muscle
+Це бекенд-додаток для сайту HealthyHub, який надає можливість зберігання та керування даними про споживану їжу, енергетичну цінність, калорії, вагу і кількість спожитої води. Додаток також надає можливість перегляду графіків за останній місяць і останній рік на основі щоденних записів води, калорій і ваги користувача.
 
-Gender :
-1 Male
-2 Famale
-3 Age
+### Запуск додатку
+Перед запуском додатку переконайтесь, що у вас встановлені такі залежності:
 
-Body params:
+Node.js (версія 16 або новіша)
+MongoDB
+Кроки для запуску:
 
-1 Height
-2 Weight
+Склонуйте цей репозиторій на свій локальний комп'ютер:
 
-Your Activity :
+git clone https://github.com/your-username/healthyhub-backend.git
+cd healthyhub-backend
+Встановіть залежності:
+npm install
+Налаштуйте змінні оточення в файлі .env для з'єднання з вашою базою даних MongoDB:
 
-1   1.2 - if you do not have physical activity and sedentary work
-2   1,375 - if you do short runs or light gymnastics 1-3 times a week
-3   1.55 - if you play sports with average loads 3-5 times a week
-4   1,725 ​​- if you train fully 6-7 times a week
-5   1.9 - if your work is related to physical labor, you train 2 times a day and include strength exercises in your training program
+MONGODB_URI=your-mongodb-uri
+SECRET_KEY=your-secret-key
+Запустіть додаток:
 
-Products :
+npm start
+Додаток буде доступний за адресою http://localhost:3000.
 
-1 Water
+### API Документація
+Деталі щодо доступних API можна знайти в документації <a href="https://backend-healthyhub.onrender.com/api-docs">API HealthyHub</a>.
 
-2 Food
+### Розробка
+Якщо ви бажаєте внести власні зміни або розширити функціональність додатку, слід враховувати наступні кроки:
 
-========================================================
+Створіть свою гілку для розробки:
 
+git checkout -b feature/your-feature-name
+Внесіть необхідні зміни та виконайте коміт:
 
-Controllers:
-1 User +
-2 Products ()
-3 Today - оновлення прийому всіх продуктів  , ваги , води.
+git commit -m "Add your feature"
+Завантажте вашу гілку на GitHub:
 
-
+git push origin feature/your-feature-name
+Створіть пул-реквест в цей репозиторій для обговорення та об'єднання змін.
 
 ### Команди:
 
