@@ -36,10 +36,5 @@ router.post(
 router.post("/forgot-password", ctrlWrapper(resetPassword));
 router.post("/logout", authenticate, ctrlWrapper(logout));
 router.get("/current", authenticate, ctrlWrapper(current));
-router.patch(
-  "/",
-  authenticate,
-  validateBody(userSchemas.updateSubscriptionSchema),
-  ctrlWrapper(updateSubscriptionUser)
-);
+
 module.exports = router;
