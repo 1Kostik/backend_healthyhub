@@ -5,22 +5,27 @@ const createProducts = async (req, res, next) => {
   const { _id: owner } = req.user;
 
   const body = req.body;
+
   const currentDate = formattedDate();
   const userProducts = await Products.findOne({ owner });
 
   const id = userProducts._id;
+  const userCalories = await Calories.findOne({ owner, date: currentDate });
 
   if ("breakfast" === body.type) {
     const arrayCalories = body.products.map((el) => Number(el.calories));
+
     const totalCaloriesToday = arrayCalories.reduce((previousValue, number) => {
       return previousValue + number;
     }, 0);
-    const userCalories = await Calories.findOne({ owner });
+
     if (currentDate === userCalories.date) {
       if (userCalories.calories !== 0) {
+       
         userCalories.calories = totalCaloriesToday + userCalories.calories;
         userCalories.save();
       } else {
+        
         userCalories.calories = totalCaloriesToday;
         userCalories.save();
       }
@@ -48,7 +53,7 @@ const createProducts = async (req, res, next) => {
     const totalCaloriesToday = arrayCalories.reduce((previousValue, number) => {
       return previousValue + number;
     }, 0);
-    const userCalories = await Calories.findOne({ owner });
+    // const userCalories = await Calories.findOne({ owner });
     if (currentDate === userCalories.date) {
       if (userCalories.calories !== 0) {
         userCalories.calories = totalCaloriesToday + userCalories.calories;
@@ -81,7 +86,7 @@ const createProducts = async (req, res, next) => {
     const totalCaloriesToday = arrayCalories.reduce((previousValue, number) => {
       return previousValue + number;
     }, 0);
-    const userCalories = await Calories.findOne({ owner });
+   
     if (currentDate === userCalories.date) {
       if (userCalories.calories !== 0) {
         userCalories.calories = totalCaloriesToday + userCalories.calories;
@@ -114,7 +119,7 @@ const createProducts = async (req, res, next) => {
     const totalCaloriesToday = arrayCalories.reduce((previousValue, number) => {
       return previousValue + number;
     }, 0);
-    const userCalories = await Calories.findOne({ owner });
+   
     if (currentDate === userCalories.date) {
       if (userCalories.calories !== 0) {
         userCalories.calories = totalCaloriesToday + userCalories.calories;
