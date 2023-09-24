@@ -24,21 +24,6 @@ const type = body.type;
   const userCalories = await Calories.findOne({ owner, date: currentDate });
 
   if ("breakfast" === type) {
-
-
-
-    
-    const breakfast = { breakfast: [...userProducts.breakfast, ...arryProducts] };
-  const newProducts = await Products.findByIdAndUpdate(
-    id,
-    { ...breakfast },
-    { new: true }
-  );
-
-
-
-    
-    
     if (userCalories.calories !== 0) {
       userCalories.calories = totalCaloriesToday + userCalories.calories;
       userCalories.save();
@@ -48,21 +33,15 @@ const type = body.type;
     }
     userProducts.totalCalories = userCalories.calories;
 
-
-    
-userProducts.breakfast = newProducts.breakfast;
-
-    
-    
     userProducts.save();
 
-    // const breakfast = { breakfast: [...arryProducts,...userProducts[type]] };
+    const breakfast = { breakfast: [...arryProducts,...userProducts[type]] };
 
-    // const newProducts = await Products.findByIdAndUpdate(
-    //   id,
-    //   { ...breakfast },
-    //   { new: true }
-    // );
+    const newProducts = await Products.findByIdAndUpdate(
+      id,
+      { ...breakfast },
+      { new: true }
+    );
     res.json({
       status: "success",
       code: 200,
