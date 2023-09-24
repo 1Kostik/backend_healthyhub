@@ -4,7 +4,6 @@ const { formattedDate } = require("../../utils");
 const updateProducts = async (req, res, next) => {
   const { _id: owner } = req.user;
   const { id } = req.params;
- 
 
   const currentDate = formattedDate();
   const body = req.body;
@@ -15,11 +14,11 @@ const updateProducts = async (req, res, next) => {
   const userProduct = await Products.findOne({ owner });
   const oldCalories = userProduct[type].find((el) => el._id.toString() === id);
   if (!oldCalories) {
-      return res.status(404).json({
-    status: "error",
-    code: 404,
-    message: `Product with id=${id} not found`,
-  });
+    return res.status(404).json({
+      status: "error",
+      code: 404,
+      message: `Product with id=${id} not found`,
+    });
   }
   const caloriesUser = await Calories.findOne({ owner, date: currentDate });
 
@@ -31,10 +30,6 @@ const updateProducts = async (req, res, next) => {
   const index = userProduct[type].findIndex(
     (item) => item._id.toString() === id
   );
-  //   if (index === -1) {
-  //     next(HttpError(404, `Product with id=${id} not found`));
-  //   }
-
   userProduct[type][index] = body.product;
   userProduct.save();
 
