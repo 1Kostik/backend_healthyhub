@@ -3,14 +3,14 @@ const { formattedDate } = require("../../utils");
 
 const getAllProducts = async (req, res, next) => {
   const { _id: owner } = req.user;
-  
+
   const currentDate = formattedDate();
-  
+
   const userProducts = await Products.findOne({ owner });
-  const userCalories = await Calories.findOne({ owner });
+  const userCalories = await Calories.findOne({ owner, date: currentDate });
 
   if (!userProducts) {
-    await Calories.create({calories:0,owner, date:currentDate});
+    await Calories.create({ calories: 0, owner, date: currentDate });
     const newProducts = await Products.create({
       lunch: [],
       snack: [],
@@ -33,7 +33,7 @@ const getAllProducts = async (req, res, next) => {
   const id = userProducts._id;
 
   if (currentDate !== userProducts.date) {
-    await Calories.create({calories:0,owner, date:currentDate});
+    await Calories.create({ calories: 0, owner, date: currentDate });
     const newProducts = await Products.findByIdAndUpdate(
       id,
       {
@@ -56,28 +56,16 @@ const getAllProducts = async (req, res, next) => {
     });
   }
   if (currentDate === userProducts.date) {
-   
-    if (currentDate === userCalories.date) {     
-  
-     userProducts.totalCalories = userCalories.calories;
-     userProducts.save();
+    userProducts.totalCalories = userCalories.calories;
+    userProducts.save();
 
-      res.status(200).json({
-        status: "success",
-        code: 200,
-        data: {
-          userProducts,
-        },
-      });
-    }else{   
     res.status(200).json({
       status: "success",
       code: 200,
       data: {
         userProducts,
       },
-    });}
-   
+    });
   }
 };
 module.exports = getAllProducts;
