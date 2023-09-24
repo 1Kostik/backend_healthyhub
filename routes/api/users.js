@@ -4,7 +4,7 @@ const {
   uploadAvatar,
   updateUserInfo,
  } = require("../../controllers/");
-const { authenticate, resize } = require("../../middlewares");
+const { authenticate} = require("../../middlewares");
 const multer = require("multer");
 const { ctrlWrapper } = require("../../utils");
 
@@ -30,7 +30,7 @@ router.patch(
   "/avatar",
   authenticate,
   upload.single("avatarURL"),
-  resize,
+
   ctrlWrapper(uploadAvatar)
 );
 router.patch("/update", authenticate, ctrlWrapper(updateUserInfo));

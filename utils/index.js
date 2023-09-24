@@ -5,15 +5,13 @@ const sendEmail = require("./sendEmail");
 const formattedDate = require("./formattedDate");
 const { sendNewPasswordByEmail } = require("./sendNewPasswordByEmail");
 const { calculateBMR } = require("./calculateBMR");
-const { sumCalories  } = require("./calculateCalories");
 const getLastMonthStartDate = require("./getLastMonthStartDate");
 const getLastYearStartDate = require("./getLastYearStartDate");
 
 module.exports = {
   sendEmail,
   HttpError,
-  ctrlWrapper,
-  sumCalories,
+  ctrlWrapper,  
   calculateBMR,
   formattedDate,
   handleMongooseError,
