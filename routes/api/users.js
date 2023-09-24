@@ -1,7 +1,9 @@
 const path = require("path");
 const express = require("express");
+
 const { uploadAvatar, updateUserInfo } = require("../../controllers/");
 const { authenticate } = require("../../middlewares");
+
 const multer = require("multer");
 const { ctrlWrapper } = require("../../utils");
 

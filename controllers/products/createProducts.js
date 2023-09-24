@@ -40,6 +40,7 @@ const createProducts = async (req, res, next) => {
         data: {
           type: "breakfast",
           product: newProducts.breakfast,
+          totalCalories:userCalories.calories,
         },
       });
     }
@@ -68,6 +69,7 @@ const createProducts = async (req, res, next) => {
         data: {
           type: "snack",
           product: newProducts.snack,
+          totalCalories:userCalories.calories,
         },
       });
     }
@@ -96,6 +98,7 @@ const createProducts = async (req, res, next) => {
         data: {
           type: "lunch",
           product: newProducts.lunch,
+          totalCalories:userCalories.calories,
         },
       });
     }
@@ -124,6 +127,7 @@ const createProducts = async (req, res, next) => {
         data: {
           type: "dinner",
           product: newProducts.dinner,
+          totalCalories:userCalories.calories,
         },
       });
     }
