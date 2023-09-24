@@ -17,120 +17,112 @@ const createProducts = async (req, res, next) => {
   const userCalories = await Calories.findOne({ owner, date: currentDate });
 
   if ("breakfast" === body.type) {
-    if (currentDate === userCalories.date) {
-      if (userCalories.calories !== 0) {
-        userCalories.calories = totalCaloriesToday + userCalories.calories;
-        userCalories.save();
-      } else {
-        userCalories.calories = totalCaloriesToday;
-        userCalories.save();
-      }
-      userProducts.totalCalories = userCalories.calories;
-      userProducts.save();
-
-      const breakfast = { breakfast: [...body.products] };
-      const newProducts = await Products.findByIdAndUpdate(
-        id,
-        { ...breakfast },
-        { new: true }
-      );
-      res.json({
-        status: "success",
-        code: 200,
-        data: {
-          type: "breakfast",
-          product: newProducts.breakfast,
-          totalCalories:userCalories.calories,
-        },
-      });
+    if (userCalories.calories !== 0) {
+      userCalories.calories = totalCaloriesToday + userCalories.calories;
+      userCalories.save();
+    } else {
+      userCalories.calories = totalCaloriesToday;
+      userCalories.save();
     }
+    userProducts.totalCalories = userCalories.calories;
+    userProducts.save();
+
+    const breakfast = { breakfast: [...body.products] };
+    const newProducts = await Products.findByIdAndUpdate(
+      id,
+      { ...breakfast },
+      { new: true }
+    );
+    res.json({
+      status: "success",
+      code: 200,
+      data: {
+        type: "breakfast",
+        product: newProducts.breakfast,
+        totalCalories: userCalories.calories,
+      },
+    });
   }
   if ("snack" === body.type) {
-    if (currentDate === userCalories.date) {
-      if (userCalories.calories !== 0) {
-        userCalories.calories = totalCaloriesToday + userCalories.calories;
-        userCalories.save();
-      } else {
-        userCalories.calories = totalCaloriesToday;
-        userCalories.save();
-      }
-      userProducts.totalCalories = userCalories.calories;
-      userProducts.save();
-
-      const snack = { snack: [...body.products] };
-      const newProducts = await Products.findByIdAndUpdate(
-        id,
-        { ...snack },
-        { new: true }
-      );
-      res.json({
-        status: "success",
-        code: 200,
-        data: {
-          type: "snack",
-          product: newProducts.snack,
-          totalCalories:userCalories.calories,
-        },
-      });
+    if (userCalories.calories !== 0) {
+      userCalories.calories = totalCaloriesToday + userCalories.calories;
+      userCalories.save();
+    } else {
+      userCalories.calories = totalCaloriesToday;
+      userCalories.save();
     }
+    userProducts.totalCalories = userCalories.calories;
+    userProducts.save();
+
+    const snack = { snack: [...body.products] };
+    const newProducts = await Products.findByIdAndUpdate(
+      id,
+      { ...snack },
+      { new: true }
+    );
+    res.json({
+      status: "success",
+      code: 200,
+      data: {
+        type: "snack",
+        product: newProducts.snack,
+        totalCalories: userCalories.calories,
+      },
+    });
   }
   if ("lunch" === body.type) {
-    if (currentDate === userCalories.date) {
-      if (userCalories.calories !== 0) {
-        userCalories.calories = totalCaloriesToday + userCalories.calories;
-        userCalories.save();
-      } else {
-        userCalories.calories = totalCaloriesToday;
-        userCalories.save();
-      }
-      userProducts.totalCalories = userCalories.calories;
-      userProducts.save();
-
-      const lunch = { lunch: [...body.products] };
-      const newProducts = await Products.findByIdAndUpdate(
-        id,
-        { ...lunch },
-        { new: true }
-      );
-      res.json({
-        status: "success",
-        code: 200,
-        data: {
-          type: "lunch",
-          product: newProducts.lunch,
-          totalCalories:userCalories.calories,
-        },
-      });
+    if (userCalories.calories !== 0) {
+      userCalories.calories = totalCaloriesToday + userCalories.calories;
+      userCalories.save();
+    } else {
+      userCalories.calories = totalCaloriesToday;
+      userCalories.save();
     }
+    userProducts.totalCalories = userCalories.calories;
+    userProducts.save();
+
+    const lunch = { lunch: [...body.products] };
+    const newProducts = await Products.findByIdAndUpdate(
+      id,
+      { ...lunch },
+      { new: true }
+    );
+    res.json({
+      status: "success",
+      code: 200,
+      data: {
+        type: "lunch",
+        product: newProducts.lunch,
+        totalCalories: userCalories.calories,
+      },
+    });
   }
   if ("dinner" === body.type) {
-    if (currentDate === userCalories.date) {
-      if (userCalories.calories !== 0) {
-        userCalories.calories = totalCaloriesToday + userCalories.calories;
-        userCalories.save();
-      } else {
-        userCalories.calories = totalCaloriesToday;
-        userCalories.save();
-      }
-      userProducts.totalCalories = userCalories.calories;
-      userProducts.save();
-
-      const dinner = { dinner: [...body.products] };
-      const newProducts = await Products.findByIdAndUpdate(
-        id,
-        { ...dinner },
-        { new: true }
-      );
-      res.json({
-        status: "success",
-        code: 200,
-        data: {
-          type: "dinner",
-          product: newProducts.dinner,
-          totalCalories:userCalories.calories,
-        },
-      });
+    if (userCalories.calories !== 0) {
+      userCalories.calories = totalCaloriesToday + userCalories.calories;
+      userCalories.save();
+    } else {
+      userCalories.calories = totalCaloriesToday;
+      userCalories.save();
     }
+    userProducts.totalCalories = userCalories.calories;
+    userProducts.save();
+
+    const dinner = { dinner: [...body.products] };
+    const newProducts = await Products.findByIdAndUpdate(
+      id,
+      { ...dinner },
+      { new: true }
+    );
+    res.json({
+      status: "success",
+      code: 200,
+      data: {
+        type: "dinner",
+        product: newProducts.dinner,
+        totalCalories: userCalories.calories,
+      },
+    });
   }
 };
 module.exports = createProducts;
