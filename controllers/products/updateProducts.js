@@ -30,6 +30,7 @@ const updateProducts = async (req, res, next) => {
 
   const index = userProduct[type].findIndex((item) => item.id === id);
   userProduct[type][index] = product;
+  userProduct.totalCalories = caloriesUser.calories;
   userProduct.save();
 
   const updateProduct = userProduct[type].find(
