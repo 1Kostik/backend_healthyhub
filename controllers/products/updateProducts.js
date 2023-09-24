@@ -7,12 +7,13 @@ const updateProducts = async (req, res, next) => {
 
   const currentDate = formattedDate();
   const body = req.body;
-
+  const product = body.product;
+  product.id = id;
   const type = body.type;
   const calories = Number(body.product.calories);
 
   const userProduct = await Products.findOne({ owner });
-  const oldCalories = userProduct[type].find((el) => el._id.toString() === id);
+  const oldCalories = userProduct[type].find((el) => el.id === id);
   if (!oldCalories) {
     return res.status(404).json({
       status: "error",
@@ -27,16 +28,14 @@ const updateProducts = async (req, res, next) => {
   caloriesUser.calories = updCls;
   caloriesUser.save();
 
-  const index = userProduct[type].findIndex(
-    (item) => item._id.toString() === id
-  );
-  userProduct[type][index] = body.product;
+  const index = userProduct[type].findIndex((item) => item.id === id);
+  userProduct[type][index] = product;
   userProduct.save();
 
   const updateProduct = userProduct[type].find(
-    (el) => el.name === body.product.name
+    (el) => el.name === product.name
   );
- 
+
   res.json({
     status: "success",
     code: 200,

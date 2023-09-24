@@ -1,10 +1,17 @@
 const { Products, Calories } = require("../../models");
 const { formattedDate } = require("../../utils");
+const crypto = require("crypto");
 
 const createProducts = async (req, res, next) => {
   const { _id: owner } = req.user;
 
   const body = req.body;
+
+  const arryProducts = body.products;
+
+  for (let i = 0; i < arryProducts.length; i += 1) {
+    arryProducts[i].id = crypto.randomUUID();
+  }
 
   const currentDate = formattedDate();
   const arrayCalories = body.products.map((el) => Number(el.calories));
@@ -27,7 +34,8 @@ const createProducts = async (req, res, next) => {
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const breakfast = { breakfast: [...body.products] };
+    const breakfast = { breakfast: [...arryProducts] };
+
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...breakfast },
@@ -54,7 +62,7 @@ const createProducts = async (req, res, next) => {
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const snack = { snack: [...body.products] };
+    const snack = { snack: [...arryProducts] };
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...snack },
@@ -81,7 +89,7 @@ const createProducts = async (req, res, next) => {
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const lunch = { lunch: [...body.products] };
+    const lunch = { lunch: [...arryProducts] };
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...lunch },
@@ -108,7 +116,7 @@ const createProducts = async (req, res, next) => {
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const dinner = { dinner: [...body.products] };
+    const dinner = { dinner: [...arryProducts] };
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...dinner },
