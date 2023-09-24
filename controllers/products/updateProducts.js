@@ -36,7 +36,7 @@ const updateProducts = async (req, res, next) => {
   const updateProduct = userProduct[type].find(
     (el) => el.name === body.product.name
   );
-  console.log(updateProduct);
+ 
   res.json({
     status: "success",
     code: 200,
