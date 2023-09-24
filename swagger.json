@@ -1,9 +1,13 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "2.1.5",
+    "version": "0.7.6",
     "title": "HealthHub API",
-    "description": "Victory is coming very soon 🙂"
+    "description": "Victory is coming very soon 🙂",
+    "license": {
+      "name": "HealthHub by students of GoIT School FS-76",
+      "url": "https://alextkachenkofullstack.github.io/healthy-hub/"
+    }
   },
   "servers": [
     {
@@ -20,10 +24,6 @@
     },
     {
       "name": "User",
-      "description": "User endpoints"
-    },
-    {
-      "name": "Users",
       "description": "User endpoints"
     },
     {
@@ -431,9 +431,18 @@
 
     "/api/users/current": {
       "get": {
-        "tags": ["Users"],
+        "tags": ["User"],
         "summary": "Get current user",
         "parameters": [
+          {
+            "in": "header",
+            "name": "id",
+            "description": "User's id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "in": "header",
             "name": "Authorization",
@@ -468,7 +477,7 @@
     },
     "/api/users/update": {
       "patch": {
-        "tags": ["Users"],
+        "tags": ["User"],
         "summary": "Update user's information",
         "parameters": [
           {
@@ -479,6 +488,11 @@
             "schema": {
               "type": "string"
             }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
           }
         ],
 
@@ -511,7 +525,7 @@
     },
     "/api/users/avatar": {
       "patch": {
-        "tags": ["Users"],
+        "tags": ["User"],
         "summary": "Upload user avatar",
         "parameters": [
           {
@@ -522,6 +536,11 @@
             "schema": {
               "type": "string"
             }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -543,7 +562,7 @@
           }
         },
         "responses": {
-          "204": {
+          "200": {
             "description": "Avatar uploaded successfully"
           },
           "400": {
@@ -563,6 +582,22 @@
       "post": {
         "tags": ["User"],
         "summary": "Add food intake for a meal type",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "description": "Food intake object",
           "required": true,
@@ -671,6 +706,31 @@
       "get": {
         "tags": ["User"],
         "summary": "Get user's food intake",
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Date of food intake",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful retrieval",
@@ -814,6 +874,20 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -921,9 +995,6 @@
       "post": {
         "tags": ["User"],
         "summary": "Add Water intake for a user",
-        "security": {
-          "bearerAuth": []
-        },
         "parameters": [
           {
             "in": "header",
@@ -933,6 +1004,11 @@
             "schema": {
               "type": "string"
             }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -961,6 +1037,22 @@
       "get": {
         "tags": ["User"],
         "summary": "Get user's water intake",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful retrieval",
@@ -1002,6 +1094,22 @@
       "get": {
         "tags": ["User"],
         "summary": "Get user's daily goal calories",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful retrieval",
@@ -1040,6 +1148,22 @@
       "put": {
         "tags": ["User"],
         "summary": "Update user's goal",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "description": "User's goal object",
           "required": true,
@@ -1096,6 +1220,22 @@
       "put": {
         "tags": ["User"],
         "summary": "Update user's weight",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "description": "User's weight object",
           "required": true,
@@ -1156,6 +1296,22 @@
       "get": {
         "tags": ["User"],
         "summary": "Get user's statistics",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Bearer token for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful retrieval",
@@ -1544,45 +1700,342 @@
         },
         "description": "Data for updating information about water intake."
       },
-
-      "Food": {
+      "WaterIntakeResponse": {
         "type": "object",
         "properties": {
-          "name": {
+          "status": {
             "type": "string",
-            "description": "Name of the food product"
+            "description": "The status of the response (e.g., 'success')."
           },
-          "amount": {
-            "type": "string",
-            "description": "Amount of the food product"
-          },
-          "img": {
-            "type": "string",
-            "description": "Image of the food product"
-          },
-          "calories": {
-            "type": "number",
-            "description": "Amount of calories in the food product"
-          },
-          "nutrition": {
+          "data": {
             "type": "object",
             "properties": {
-              "carbohydrates": {
-                "type": "number",
-                "description": "Amount of carbohydrates in the food product"
+              "date": {
+                "type": "string",
+                "description": "The date of the water intake."
               },
-              "protein": {
+              "value": {
                 "type": "number",
-                "description": "Amount of protein in the food product"
-              },
-              "fat": {
-                "type": "number",
-                "description": "Amount of fat in the food product"
+                "description": "The value of the water intake."
               }
             }
           }
         }
       },
+      "WeightRequest": {
+        "type": "object",
+        "properties": {
+          "weight": {
+            "type": "number",
+            "description": "Value of weight"
+          }
+        },
+        "description": "Data for updating information about weight."
+      },
+      "WeightResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "The status of the response (e.g., 'success')."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "description": "The date of the weight."
+              },
+              "weight": {
+                "type": "number",
+                "description": "The value of the weight."
+              }
+            }
+          }
+        }
+      },
+      "StatisticsRequest": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Date of the statistics"
+          }
+        },
+        "description": "Data for updating information about statistics."
+      },
+      "StatisticsResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "The status of the response (e.g., 'success')."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "water": {
+                "type": "object",
+                "properties": {
+                  "lastMonth": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "description": "The date of the water intake."
+                        },
+                        "value": {
+                          "type": "number",
+                          "description": "The value of the water intake."
+                        }
+                      }
+                    }
+                  },
+                  "lastYear": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "description": "The date of the water intake."
+                        },
+                        "value": {
+                          "type": "number",
+                          "description": "The value of the water intake."
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "weight": {
+                "type": "object",
+                "properties": {
+                  "lastMonth": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "description": "The date of the weight."
+                        },
+                        "value": {
+                          "type": "number",
+                          "description": "The value of the weight."
+                        }
+                      }
+                    }
+                  },
+                  "lastYear": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "description": "The date of the weight."
+                        },
+                        "value": {
+                          "type": "number",
+                          "description": "The value of the weight."
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "calories": {
+                "type": "object",
+                "properties": {
+                  "lastMonth": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "description": "The date of the calories."
+                        },
+                        "value": {
+                          "type": "number",
+                          "description": "The value of the calories."
+                        }
+                      }
+                    }
+                  },
+                  "lastYear": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "date": {
+                          "type": "string",
+                          "description": "The date of the calories."
+                        },
+                        "value": {
+                          "type": "number",
+                          "description": "The value of the calories."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "GoalRequest": {
+        "type": "object",
+        "properties": {
+          "goal": {
+            "type": "string",
+            "description": "Value of goal",
+            "example": "Lose Fat",
+            "enum": ["Lose Fat", "Gain Muscle", "Maintain Weight"]
+          }
+        },
+        "description": "Data for updating information about goal."
+      },
+      "GoalResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "The status of the response (e.g., 'success')."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "goal": {
+                "type": "string",
+                "description": "The value of the goal.",
+                "example": "Lose Fat",
+                "enum": ["Lose Fat", "Gain Muscle", "Maintain Weight"]
+              }
+            }
+          }
+        }
+      },
+      "DailyGoalRequest": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number",
+            "description": "Value of daily goal"
+          }
+        },
+        "description": "Data for updating information about daily goal."
+      },
+      "DailyGoalResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "The status of the response (e.g., 'success')."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "The value of the daily goal."
+              }
+            }
+          }
+        }
+      },
+      "FoodIntakeRequest":{
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of food"
+          },
+          "product": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the product"
+              },
+              "carbonohidrates": {
+                "type": "number",
+                "description": "Carbonohidrates content"
+              },
+              "protein": {
+                "type": "number",
+                "description": "Protein content"
+              },
+              "fat": {
+                "type": "number",
+                "description": "Fat content"
+              },
+              "calories": {
+                "type": "number",
+                "description": "Calories content"
+              }
+            }
+          },
+          "totalCalories": {
+            "type": "number",
+            "description": "Total calories"
+          }
+        },
+        "description": "Data for updating information about food intake."
+      },
+      "FoodIntakeResponse":{
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "The status of the response (e.g., 'success')."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Type of food"
+              },
+              "product": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the product"
+                  },
+                  "carbonohidrates": {
+                    "type": "number",
+                    "description": "Carbonohidrates content"
+                  },
+                  "protein": {
+                    "type": "number",
+                    "description": "Protein content"
+                  },
+                  "fat": {
+                    "type": "number",
+                    "description": "Fat content"
+                  },
+                  "calories": {
+                    "type": "number",
+                    "description": "Calories content"
+                  }
+                }
+              },
+              "totalCalories": {
+                "type": "number",
+                "description": "Total calories"
+              }
+            }
+          }
+        }
+      },
+      
       "EmailRequest": {
         "type": "object",
         "required": ["email"],

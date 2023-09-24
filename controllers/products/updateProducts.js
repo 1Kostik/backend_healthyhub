@@ -1,6 +1,7 @@
 const { Products, Calories } = require("../../models");
 const { formattedDate } = require("../../utils");
 
+
 const updateProducts = async (req, res, next) => {
   const { _id: owner } = req.user;
   const { id } = req.params;
@@ -22,6 +23,9 @@ const updateProducts = async (req, res, next) => {
   const index = userProduct[type].findIndex(
     (item) => item._id.toString() === id
   );
+//   if (index === -1) {
+//     next(HttpError(404, `Product with id=${id} not found`));
+//   }
 
   userProduct[type][index] = body.product;
   userProduct.save();

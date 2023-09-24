@@ -1,10 +1,9 @@
 const path = require("path");
 const express = require("express");
-const {
-  uploadAvatar,
-  updateUserInfo,
- } = require("../../controllers/");
-const { authenticate} = require("../../middlewares");
+
+const { uploadAvatar, updateUserInfo } = require("../../controllers/");
+const { authenticate } = require("../../middlewares");
+
 const multer = require("multer");
 const { ctrlWrapper } = require("../../utils");
 
@@ -25,12 +24,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-
 router.patch(
   "/avatar",
   authenticate,
   upload.single("avatarURL"),
-
   ctrlWrapper(uploadAvatar)
 );
 router.patch("/update", authenticate, ctrlWrapper(updateUserInfo));

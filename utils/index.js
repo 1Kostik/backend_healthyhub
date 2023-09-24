@@ -11,11 +11,11 @@ const getLastYearStartDate = require("./getLastYearStartDate");
 module.exports = {
   sendEmail,
   HttpError,
-  ctrlWrapper,  
+  ctrlWrapper,
   calculateBMR,
   formattedDate,
   handleMongooseError,
-  sendNewPasswordByEmail,
   getLastMonthStartDate,
   getLastYearStartDate,
+  sendNewPasswordByEmail,
 };
