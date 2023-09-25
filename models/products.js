@@ -6,7 +6,7 @@ const productSchema = Schema(
     breakfast: [
       {
         name: { type: String },
-        сarbonohidrates: { type: Number },
+        carbonohidrates: { type: Number },
         protein: { type: Number },
         fat: { type: Number },
         calories: { type: Number },
@@ -17,7 +17,7 @@ const productSchema = Schema(
     dinner: [
       {
         name: { type: String },
-        сarbonohidrates: { type: Number },
+        carbonohidrates: { type: Number },
         protein: { type: Number },
         fat: { type: Number },
         calories: { type: Number },
@@ -66,7 +66,7 @@ const addProduct = Joi.object({
   snack: Joi.array(),
   dinner: Joi.array(),
 });
-const createProduct = Joi.object({
+const createProduct = Joi.object({  
   products: Joi.array(),
   type: Joi.string(),
   breakfast: Joi.object(),
