@@ -12,7 +12,7 @@ const createProducts = async (req, res, next) => {
   const arryProducts = body.products;
 
   for (let i = 0; i < arryProducts.length; i += 1) {
-    arryProducts[i].id = crypto.randomUUID();
+    arryProducts[i].ident = crypto.randomUUID();
   }
 
   const currentDate = formattedDate();
@@ -45,12 +45,13 @@ const createProducts = async (req, res, next) => {
     userProducts.save();
 
     const breakfast = { breakfast: [...userProducts[type],...arryProducts] };
-
+    
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...breakfast },
       { new: true }
     );
+    console.log(newProducts.breakfast)
     res.json({
       status: "success",
       code: 200,
