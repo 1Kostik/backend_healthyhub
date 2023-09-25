@@ -23,14 +23,12 @@ const createProducts = async (req, res, next) => {
     return previousValue + number;
   }, 0);
 
- 
- 
+  const userProducts = await Products.findOne({ owner });
+  const id = userProducts._id;
 
   const userCalories = await Calories.findOne({ owner, date: currentDate });
 
   if ("breakfast" === type) {
-    const userProducts = await Products.findOne({ owner });
-    const id = userProducts._id;
     if (userCalories.calories !== 0) {
       userCalories.calories = totalCaloriesToday + userCalories.calories;
 
@@ -44,14 +42,14 @@ const createProducts = async (req, res, next) => {
 
     userProducts.save();
 
-    const breakfast = { breakfast: [...userProducts[type],...arryProducts] };
-    
+    const breakfast = { breakfast: [...userProducts[type], ...arryProducts] };
+
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...breakfast },
       { new: true }
     );
-    console.log(newProducts.breakfast)
+    console.log(newProducts.breakfast);
     res.json({
       status: "success",
       code: 200,
@@ -63,8 +61,6 @@ const createProducts = async (req, res, next) => {
     });
   }
   if ("snack" === type) {
-    const userProducts = await Products.findOne({ owner });
-    const id = userProducts._id;
     if (userCalories.calories !== 0) {
       userCalories.calories = totalCaloriesToday + userCalories.calories;
       userCalories.save();
@@ -75,7 +71,7 @@ const createProducts = async (req, res, next) => {
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const snack = { snack: [...userProducts[type],...arryProducts] };
+    const snack = { snack: [...userProducts[type], ...arryProducts] };
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...snack },
@@ -92,8 +88,6 @@ const createProducts = async (req, res, next) => {
     });
   }
   if ("lunch" === type) {
-    const userProducts = await Products.findOne({ owner });
-    const id = userProducts._id;
     if (userCalories.calories !== 0) {
       userCalories.calories = totalCaloriesToday + userCalories.calories;
       userCalories.save();
@@ -104,7 +98,7 @@ const createProducts = async (req, res, next) => {
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const lunch = { lunch: [...userProducts[type],...arryProducts] };
+    const lunch = { lunch: [...userProducts[type], ...arryProducts] };
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...lunch },
@@ -121,8 +115,6 @@ const createProducts = async (req, res, next) => {
     });
   }
   if ("dinner" === type) {
-    const userProducts = await Products.findOne({ owner });
-    const id = userProducts._id;
     if (userCalories.calories !== 0) {
       userCalories.calories = totalCaloriesToday + userCalories.calories;
       userCalories.save();
@@ -133,7 +125,7 @@ const createProducts = async (req, res, next) => {
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const dinner = { dinner: [...userProducts[type],...arryProducts] };
+    const dinner = { dinner: [...userProducts[type], ...arryProducts] };
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...dinner },
