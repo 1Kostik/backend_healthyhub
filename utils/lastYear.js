@@ -19,7 +19,7 @@ const getLastYearStatistics = async (owner, model) => {
       owner, // Визначається по токену при логіні
       createdAt: { $gte: firstDayOfLastYear, $lte: lastDayOfLastYear },
     })
-    .select("-_id -owner -updatedAt") // Відключаємо _id, owner і updatedAt
+    .select("-_id -owner -updatedAt -createdAt") // Відключаємо _id, owner updatedAt createdAt
     .exec();
 
   return statistics;

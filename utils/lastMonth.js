@@ -16,7 +16,7 @@ const getLastMonthStatistics = async (owner, model) => {
       owner, // Визначається по токену при логіні
       createdAt: { $gte: firstDayOfLastMonth, $lte: lastDayOfLastMonth },
     })
-    .select("-_id -owner -updatedAt") // Відключаємо _id, owner і updatedAt
+    .select("-_id -owner -updatedAt -createdAt") // Відключаємо _id, owner updatedAt createdAt
     .exec();
 
   return statistics;
