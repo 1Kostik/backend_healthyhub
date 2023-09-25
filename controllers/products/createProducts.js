@@ -6,7 +6,9 @@ const createProducts = async (req, res, next) => {
   const { _id: owner } = req.user;
 
   const body = req.body;
-const type = body.type;
+
+  const type = body.type;
+
   const arryProducts = body.products;
 
   for (let i = 0; i < arryProducts.length; i += 1) {
@@ -14,28 +16,34 @@ const type = body.type;
   }
 
   const currentDate = formattedDate();
+
   const arrayCalories = body.products.map((el) => Number(el.calories));
+
   const totalCaloriesToday = arrayCalories.reduce((previousValue, number) => {
     return previousValue + number;
   }, 0);
+
   const userProducts = await Products.findOne({ owner });
 
   const id = userProducts._id;
+
   const userCalories = await Calories.findOne({ owner, date: currentDate });
 
   if ("breakfast" === type) {
     if (userCalories.calories !== 0) {
       userCalories.calories = totalCaloriesToday + userCalories.calories;
+
       userCalories.save();
     } else {
       userCalories.calories = totalCaloriesToday;
+
       userCalories.save();
     }
     userProducts.totalCalories = userCalories.calories;
 
     userProducts.save();
 
-    const breakfast = { breakfast: [...arryProducts,...userProducts[type]] };
+    const breakfast = { breakfast: [...arryProducts, ...userProducts[type]] };
 
     const newProducts = await Products.findByIdAndUpdate(
       id,
@@ -63,7 +71,7 @@ const type = body.type;
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const snack = { snack: [...arryProducts,...userProducts[type]] };
+    const snack = { snack: [...arryProducts, ...userProducts[type]] };
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...snack },
@@ -90,7 +98,7 @@ const type = body.type;
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const lunch = { lunch: [...arryProducts,...userProducts[type]] };
+    const lunch = { lunch: [...arryProducts, ...userProducts[type]] };
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...lunch },
@@ -117,7 +125,7 @@ const type = body.type;
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const dinner = { dinner: [...arryProducts,...userProducts[type]] };
+    const dinner = { dinner: [...arryProducts, ...userProducts[type]] };
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...dinner },
