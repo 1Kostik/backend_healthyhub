@@ -10,7 +10,7 @@ const productSchema = Schema(
         protein: { type: Number },
         fat: { type: Number },
         calories: { type: Number },
-        id: { type: String },
+        ident: { type: String },
       },
     ],
 
@@ -21,7 +21,7 @@ const productSchema = Schema(
         protein: { type: Number },
         fat: { type: Number },
         calories: { type: Number },
-        id: { type: String },
+        ident: { type: String },
       },
     ],
 
@@ -32,7 +32,7 @@ const productSchema = Schema(
         protein: { type: Number },
         fat: { type: Number },
         calories: { type: Number },
-        id: { type: String },
+        ident: { type: String },
       },
     ],
 
@@ -43,7 +43,7 @@ const productSchema = Schema(
         protein: { type: Number },
         fat: { type: Number },
         calories: { type: Number },
-        id: { type: String },
+        ident: { type: String },
       },
     ],
     owner: {
@@ -74,7 +74,7 @@ const createProduct = Joi.object({
   snack: Joi.object(),
   dinner: Joi.object(),
   totalCalories: Joi.number(),
-  id:Joi.string()
+  ident:Joi.string()
 });
 const updateProduct = Joi.object({
   product: Joi.object(),
