@@ -1,60 +1,47 @@
 const { Calories, Water, Weight } = require("../../models");
-const { getLastMonthStartDate, getLastYearStartDate } = require("../../utils");
+const getLastMonthStatistics = require("../../utils/lastMonth");
+const getLastYearStatistics = require("../../utils/lastYear");
 
-const getUserStatistics = async (req, res, next) => {
+async function getUserStatistics(req, res, next) {
+  // Отримуємо ідентифікатор користувача
   const { _id: owner } = req.user;
 
-  const lastMonthStartDate = getLastMonthStartDate();
-  const lastYearStartDate = getLastYearStartDate();
+  // Отримуємо статистику за останній рік та останній місяць
+  try {
+    const waterLastYear = await getLastYearStatistics(owner, Water);
+    const waterLastMonth = await getLastMonthStatistics(owner, Water);
 
-  const lastMonthCalories = await Calories.find({
-    owner,
-    date: { $gte: lastMonthStartDate },
-  }).exec();
+    const weightLastYear = await getLastYearStatistics(owner, Weight);
+    const weightLastMonth = await getLastMonthStatistics(owner, Weight);
 
-  const lastMonthWater = await Water.find({
-    owner,
-    date: { $gte: lastMonthStartDate },
-  }).exec();
+    const caloriesLastYear = await getLastYearStatistics(owner, Calories);
+    const caloriesLastMonth = await getLastMonthStatistics(owner, Calories);
 
-  const lastMonthWeight = await Weight.find({
-    owner,
-    date: { $gte: lastMonthStartDate },
-  }).exec();
-
-  const lastYearCalories = await Calories.find({
-    owner,
-    date: { $gte: lastYearStartDate },
-  }).exec();
-
-  const lastYearWater = await Water.find({
-    owner,
-    date: { $gte: lastYearStartDate },
-  }).exec();
-
-  const lastYearWeight = await Weight.find({
-    owner,
-    date: { $gte: lastYearStartDate },
-  }).exec();
-
-  res.status(200).json({
-    status: "success",
-    code: 200,
-    data: {
-      water: {
-        lastMonth: lastMonthWater,
-        lastYear: lastYearWater,
+    // Формуємо об'єкт відповіді, який містить статистику
+    res.json({
+      status: "success",
+      code: 200,
+      data: {
+        water: {
+          lastMonth: waterLastMonth,
+          lastYear: waterLastYear,
+        },
+        weight: {
+          lastMonth: weightLastMonth,
+          lastYear: weightLastYear,
+        },
+        calories: {
+          lastMonth: caloriesLastMonth,
+          lastYear: caloriesLastYear,
+        },
       },
-      weight: {
-        lastMonth: lastMonthWeight,
-        lastYear: lastYearWeight,
-      },
-      calories: {
-        lastMonth: lastMonthCalories,
-        lastYear: lastYearCalories,
-      },
-    },
-  });
-};
+    });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .json({ status: "error", code: 500, message: "Internal Server Error" });
+  }
+}
 
 module.exports = getUserStatistics;

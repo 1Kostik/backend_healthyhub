@@ -5,8 +5,8 @@ const sendEmail = require("./sendEmail");
 const formattedDate = require("./formattedDate");
 const { sendNewPasswordByEmail } = require("./sendNewPasswordByEmail");
 const { calculateBMR } = require("./calculateBMR");
-const getLastMonthStartDate = require("./getLastMonthStartDate");
-const getLastYearStartDate = require("./getLastYearStartDate");
+const getLastMonthStatistics = require("./lastMonth");
+const getLastYearStatistics = require("./lastYear");
 
 module.exports = {
   sendEmail,
@@ -15,7 +15,7 @@ module.exports = {
   calculateBMR,
   formattedDate,
   handleMongooseError,
-  getLastMonthStartDate,
-  getLastYearStartDate,
+  getLastMonthStatistics,
+  getLastYearStatistics,
   sendNewPasswordByEmail,
 };
