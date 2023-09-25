@@ -44,7 +44,7 @@ const createProducts = async (req, res, next) => {
 
     userProducts.save();
 
-    const breakfast = { breakfast: [...arryProducts, ...userProducts[type]] };
+    const breakfast = { breakfast: [...userProducts[type],...arryProducts] };
 
     const newProducts = await Products.findByIdAndUpdate(
       id,
@@ -74,7 +74,7 @@ const createProducts = async (req, res, next) => {
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const snack = { snack: [...arryProducts, ...userProducts[type]] };
+    const snack = { snack: [...userProducts[type],...arryProducts] };
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...snack },
@@ -103,7 +103,7 @@ const createProducts = async (req, res, next) => {
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const lunch = { lunch: [...arryProducts, ...userProducts[type]] };
+    const lunch = { lunch: [...userProducts[type],...arryProducts] };
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...lunch },
@@ -132,7 +132,7 @@ const createProducts = async (req, res, next) => {
     userProducts.totalCalories = userCalories.calories;
     userProducts.save();
 
-    const dinner = { dinner: [...arryProducts, ...userProducts[type]] };
+    const dinner = { dinner: [...userProducts[type],...arryProducts] };
     const newProducts = await Products.findByIdAndUpdate(
       id,
       { ...dinner },
