@@ -6,7 +6,7 @@ const productSchema = Schema(
     breakfast: [
       {
         name: { type: String },
-        carbohydrates: { type: Number },
+        сarbonohidrates: { type: Number },
         protein: { type: Number },
         fat: { type: Number },
         calories: { type: Number },
@@ -17,7 +17,7 @@ const productSchema = Schema(
     dinner: [
       {
         name: { type: String },
-        carbohydrates: { type: Number },
+        сarbonohidrates: { type: Number },
         protein: { type: Number },
         fat: { type: Number },
         calories: { type: Number },
@@ -28,7 +28,7 @@ const productSchema = Schema(
     snack: [
       {
         name: { type: String },
-        carbohydrates: { type: Number },
+        сarbonohidrates: { type: Number },
         protein: { type: Number },
         fat: { type: Number },
         calories: { type: Number },
@@ -39,7 +39,7 @@ const productSchema = Schema(
     lunch: [
       {
         name: { type: String },
-        carbohydrates: { type: Number },
+        сarbonohidrates: { type: Number },
         protein: { type: Number },
         fat: { type: Number },
         calories: { type: Number },
