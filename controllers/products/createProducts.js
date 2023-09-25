@@ -23,13 +23,14 @@ const createProducts = async (req, res, next) => {
     return previousValue + number;
   }, 0);
 
-  const userProducts = await Products.findOne({ owner });
-
-  const id = userProducts._id;
+ 
+ 
 
   const userCalories = await Calories.findOne({ owner, date: currentDate });
 
   if ("breakfast" === type) {
+    const userProducts = await Products.findOne({ owner });
+    const id = userProducts._id;
     if (userCalories.calories !== 0) {
       userCalories.calories = totalCaloriesToday + userCalories.calories;
 
@@ -61,6 +62,8 @@ const createProducts = async (req, res, next) => {
     });
   }
   if ("snack" === type) {
+    const userProducts = await Products.findOne({ owner });
+    const id = userProducts._id;
     if (userCalories.calories !== 0) {
       userCalories.calories = totalCaloriesToday + userCalories.calories;
       userCalories.save();
@@ -88,6 +91,8 @@ const createProducts = async (req, res, next) => {
     });
   }
   if ("lunch" === type) {
+    const userProducts = await Products.findOne({ owner });
+    const id = userProducts._id;
     if (userCalories.calories !== 0) {
       userCalories.calories = totalCaloriesToday + userCalories.calories;
       userCalories.save();
@@ -115,6 +120,8 @@ const createProducts = async (req, res, next) => {
     });
   }
   if ("dinner" === type) {
+    const userProducts = await Products.findOne({ owner });
+    const id = userProducts._id;
     if (userCalories.calories !== 0) {
       userCalories.calories = totalCaloriesToday + userCalories.calories;
       userCalories.save();
