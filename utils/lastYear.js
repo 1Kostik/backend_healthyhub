@@ -19,10 +19,16 @@ const getLastYearStatistics = async (owner, model) => {
       owner, // Визначається по токену при логіні
       createdAt: { $gte: firstDayOfLastYear, $lte: lastDayOfLastYear },
     })
-    .select("-_id -owner -updatedAt -createdAt") // Відключаємо _id, owner updatedAt createdAt
+    .select("-_id -owner -updatedAt") // Відключаємо _id, owner updatedAt
     .exec();
 
-  return statistics;
+  // Форматуємо дати в формат "January" ...
+  const formattedStatistics = statistics.map((stat) => ({
+    value: stat.value,
+    date: new Date(stat.createdAt).toLocaleString("en-US", { month: "long" }),
+  }));
+
+  return formattedStatistics;
 };
 
 module.exports = getLastYearStatistics;
