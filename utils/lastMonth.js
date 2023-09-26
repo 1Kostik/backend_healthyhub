@@ -16,10 +16,28 @@ const getLastMonthStatistics = async (owner, model) => {
       owner, // Визначається по токену при логіні
       createdAt: { $gte: firstDayOfLastMonth, $lte: lastDayOfLastMonth },
     })
-    .select("-_id -owner -updatedAt -createdAt") // Відключаємо _id, owner updatedAt createdAt
+    .select("-_id -owner -updatedAt -createdAt") // Відключаємо _id, owner updatedAt createdAt)
     .exec();
 
-  return statistics;
+  // Перероблюємо формат даты
+  const formattedStatistics = statistics.map((item) => ({
+    value: item.value,
+    date: formatDate(item.date),
+  }));
+
+  return formattedStatistics;
 };
+
+// Форматуємо дату
+function formatDate(dateString) {
+  const parts = dateString.split(".");
+  if (parts.length === 3) {
+    const day = parts[0].padStart(2, "0");
+    const month = parts[1].padStart(2, "0");
+    const year = parts[2];
+    return `${year}-${month}-${day}`;
+  }
+  return "Invalid Date";
+}
 
 module.exports = getLastMonthStatistics;
