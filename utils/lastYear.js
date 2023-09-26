@@ -22,6 +22,9 @@ const getLastYearStatistics = async (owner, model) => {
     .select("-_id -owner -updatedAt") // Відключаємо _id, owner updatedAt
     .exec();
 
+  // Сортуємо статистику по даті в порядку зростання
+  statistics.sort((a, b) => a.createdAt - b.createdAt);
+
   // Форматуємо дати в формат "January" ...
   const formattedStatistics = statistics.map((stat) => ({
     value: stat.value,

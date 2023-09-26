@@ -17,6 +17,7 @@ const getLastMonthStatistics = async (owner, model) => {
       createdAt: { $gte: firstDayOfLastMonth, $lte: lastDayOfLastMonth },
     })
     .select("-_id -owner -updatedAt -createdAt") // Відключаємо _id, owner updatedAt createdAt)
+    .sort({ createdAt: 1 }) // Сортуємо по даті в порядку зростання
     .exec();
 
   // Перероблюємо формат даты
