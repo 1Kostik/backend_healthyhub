@@ -3,7 +3,7 @@
   "info": {
     "version": "0.7.6",
     "title": "HealthHub API",
-    "description": "Victory is coming very soon 🙂",
+    "description": "Victory is coming very soon 🍎",
     "license": {
       "name": "HealthHub by students of GoIT School FS-76",
       "url": "https://alextkachenkofullstack.github.io/healthy-hub/"
@@ -1949,7 +1949,7 @@
           }
         }
       },
-      "FoodIntakeRequest":{
+      "FoodIntakeRequest": {
         "type": "object",
         "properties": {
           "type": {
@@ -1988,7 +1988,7 @@
         },
         "description": "Data for updating information about food intake."
       },
-      "FoodIntakeResponse":{
+      "FoodIntakeResponse": {
         "type": "object",
         "properties": {
           "status": {
@@ -2035,7 +2035,92 @@
           }
         }
       },
-      
+      "Food": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the product"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Amount of the product"
+          },
+          "img": {
+            "type": "string",
+            "description": "Image of the product"
+          },
+          "calories": {
+            "type": "number",
+            "description": "Calories content"
+          },
+          "nutrition": {
+            "type": "object",
+            "properties": {
+              "carbohydrates": {
+                "type": "number",
+                "description": "Carbonohidrates content"
+              },
+              "protein": {
+                "type": "number",
+                "description": "Protein content"
+              },
+              "fat": {
+                "type": "number",
+                "description": "Fat content"
+              }
+            }
+          }
+        }
+      },
+      "FoodResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "The status of the response (e.g., 'success')."
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the product"
+              },
+              "amount": {
+                "type": "string",
+                "description": "Amount of the product"
+              },
+              "img": {
+                "type": "string",
+                "description": "Image of the product"
+              },
+              "calories": {
+                "type": "number",
+                "description": "Calories content"
+              },
+              "nutrition": {
+                "type": "object",
+                "properties": {
+                  "carbohydrates": {
+                    "type": "number",
+                    "description": "Carbonohidrates content"
+                  },
+                  "protein": {
+                    "type": "number",
+                    "description": "Protein content"
+                  },
+                  "fat": {
+                    "type": "number",
+                    "description": "Fat content"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+
       "EmailRequest": {
         "type": "object",
         "required": ["email"],
