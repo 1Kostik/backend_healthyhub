@@ -27,7 +27,7 @@ const getLastYearStatistics = async (owner, model) => {
 
   // Форматуємо дати в формат "January" ...
   const formattedStatistics = statistics.map((stat) => ({
-    value: stat.value,
+    value: stat.value ? stat.value : stat.weigth || stat.calories,
     date: new Date(stat.createdAt).toLocaleString("en-US", { month: "long" }),
   }));
 
