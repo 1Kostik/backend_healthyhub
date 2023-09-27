@@ -22,7 +22,7 @@ const getLastMonthStatistics = async (owner, model) => {
 
   // Перероблюємо формат даты
   const formattedStatistics = statistics.map((item) => ({
-    value: item.value ? item.value : item.weigth || item.calories,
+    value: item.value ? item.value : item.weight || item.calories,
     date: formatDate(item.date),
   }));
 
