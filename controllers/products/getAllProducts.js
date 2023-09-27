@@ -24,7 +24,7 @@ const getAllProducts = async (req, res, next) => {
       status: "success",
       code: 200,
       data: {
-        newProducts,
+        userProducts:newProducts,
       },
     });
     return;
@@ -51,7 +51,7 @@ const getAllProducts = async (req, res, next) => {
       status: "success",
       code: 200,
       data: {
-        newProducts,
+        userProducts:newProducts,
       },
     });
   }
