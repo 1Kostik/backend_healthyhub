@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "version": "0.7.6",
+    "version": "0.7.6.1",
     "title": "HealthHub API",
     "description": "Victory is coming very soon 🍎",
     "license": {
@@ -9,6 +9,8 @@
       "url": "https://alextkachenkofullstack.github.io/healthy-hub/"
     }
   },
+  "consumes": ["application/json", "multipart/form-data"],
+  "produces": ["application/json", "multipart/form-data"],
   "servers": [
     {
       "url": "https://backend-healthyhub.onrender.com/"
@@ -36,35 +38,7 @@
       "post": {
         "tags": ["Auth"],
         "summary": "User registration",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "User's name",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "email",
-            "in": "path",
-            "description": "User's email",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "password",
-            "in": "path",
-            "description": "User's password",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "security": [],
         "requestBody": {
           "description": "Registration object",
           "required": true,
@@ -202,17 +176,7 @@
       "post": {
         "tags": ["Auth"],
         "summary": "Check the presence of an email in the database",
-        "parameters": [
-          {
-            "name": "email",
-            "in": "path",
-            "description": "User's email",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "parameters": [],
         "requestBody": {
           "description": "Request to check an email",
           "required": true,
@@ -253,26 +217,8 @@
       "post": {
         "tags": ["Auth"],
         "summary": "User signin",
-        "parameters": [
-          {
-            "name": "email",
-            "in": "path",
-            "description": "User's email",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "password",
-            "in": "path",
-            "description": "User's password",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "parameters": [],
+
         "requestBody": {
           "description": "Signin's object",
           "required": true,
@@ -308,17 +254,7 @@
       "post": {
         "tags": ["Auth"],
         "summary": "User logout",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "userId",
-            "description": "User's id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "parameters": [],
         "security": [
           {
             "bearerAuth": []
@@ -396,7 +332,7 @@
         "parameters": [
           {
             "name": "email",
-            "in": "path",
+            "in": "body",
             "description": "User's email",
             "required": true,
             "schema": {
@@ -433,31 +369,8 @@
       "get": {
         "tags": ["User"],
         "summary": "Get current user",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "id",
-            "description": "User's id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "header",
-            "name": "Authorization",
-            "description": "Bearer token for authentication",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -1492,6 +1405,13 @@
   },
 
   "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
     "schemas": {
       "RegistrationRequest": {
         "type": "object",
